@@ -75,19 +75,17 @@ def signupVendAmb(request):
     return render(request, 'acme/signupVendAmb.html', args)
 
 def signupVendFijo(request):
-    print request.method
     if request.method == 'POST':
         form = VendFijoForm(request.POST)
-        print form.is_valid()
         print form.errors
         if form.is_valid():# and profile_form.is_valid():
-            form.save()
-            HttpResponseRedirect('/accounts/loggedin/')
+            user = form.save()
+            #HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
-            #messages.success(request, ('Your profile was successfully updated!'))
+            user.save()
+            messages.success(request, ('Your profile was successfully updated!'))
             #return redirect('settings:profile')
     else:
-        print "no"
         form = VendFijoForm()
 
     args = {}
