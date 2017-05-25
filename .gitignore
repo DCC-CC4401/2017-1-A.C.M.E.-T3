@@ -2,6 +2,7 @@
 .idea
 .DS_Store
 Ingenieria/.idea
+Ingenieria/.idea/*
 Ingenieria/db.sqlite3
 Ingenieria/Ingenieria/*.pyc
 Ingenieria/acme/*.pyc
