@@ -15,7 +15,7 @@ from django.contrib.auth import authenticate, login
 #from acme.models import UserProfile
 from django.template.context_processors import csrf
 
-from acme.forms import UserForm, UserRegisterForm
+from acme.forms import UserForm, VendFijoForm
 
 
 def index(request):
@@ -77,10 +77,9 @@ def signupVendAmb(request):
 def signupVendFijo(request):
     print request.method
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = VendFijoForm(request.POST)
         print form.is_valid()
         print form.errors
-        #profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():# and profile_form.is_valid():
             form.save()
             HttpResponseRedirect('/accounts/loggedin/')
@@ -89,8 +88,8 @@ def signupVendFijo(request):
             #return redirect('settings:profile')
     else:
         print "no"
-        form = UserForm()
-        #profile_form = ProfileForm(instance=request.user.profile)
+        form = VendFijoForm()
+
     args = {}
     args.update(csrf(request))
     args['form'] = form

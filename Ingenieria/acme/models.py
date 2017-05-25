@@ -5,39 +5,25 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
-#class UserProfile(models.Model):
-#    user = models.OneToOneField(User, on_delete=models.CASCADE)
-#    avatar = models.ImageField()
-
-#    @receiver(post_save, sender=User)
- #   def create_user_profile(sender, instance, created, **kwargs):
-  #      if created:
-   #         UserProfile.objects.create(user=instance)
-
-    #@receiver(post_save, sender=User)
-#    def save_user_profile(sender, instance, **kwargs):
- #       instance.profile.save()
-
-#class VendedorFijoProfile(models.Model):
- #   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  #  init_time = models.DateTimeField()
-   # end_time = models.DateTimeField()
+class Product(models.Model):
+    cost = models.PositiveIntegerField()
+    name = models.CharField(max_length=30)
+    description = models.TextField(max_length=300)
+    stock = models.PositiveIntegerField()
     #avatar = models.ImageField()
-  #  platos = models.ForeignKey
 
-#    @receiver(post_save, sender=User)
- #   def create_user_profile(sender, instance, created, **kwargs):
-  #      if created:
-   #         UserProfile.objects.create(user=instance)
+class Payment(models.Model):
+    name = models.CharField(max_length=30)
 
-    #@receiver(post_save, sender=User)
- #   def save_user_profile(sender, instance, **kwargs):
-  #      instance.profile.save()
 
-   # def update_profile(request, user_id):
-    #    user = User.objects.get(pk=user_id)
-     #   user.save()
+class VendedorFijoProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    init_time = models.TimeField()
+    end_time = models.TimeField()
+    likes = models.PositiveIntegerField()
+    #avatar = models.ImageField()
+  #  dishes = models.ForeignKey(Product)
+    #payment = models.ForeignKey(Payment)
 
 #class VendedorAmbProfile(models.Model):
  #   user = models.OneToOneField(User, on_delete=models.CASCADE)
