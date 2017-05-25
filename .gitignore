@@ -1,6 +1,8 @@
 #git ignore
 .idea
 .DS_Store
-Ingenieria/.idea/*
+Ingenieria/.idea
 Ingenieria/db.sqlite3
-/*.pyc
+Ingenieria/Ingenieria/*.pyc
+Ingenieria/acme/*.pyc
+Ingenieria/acme/migrations/*.pyc
