@@ -1,0 +1,6 @@
+#git ignore
+.idea
+.DS_Store
+Ingenieria/.idea/*
+Ingenieria/db.sqlite3
+/*.pyc
