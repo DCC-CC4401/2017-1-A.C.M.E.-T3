@@ -12,3 +12,5 @@ def login(request):
 def signup(request):
     return render(request, 'acme/signup.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
+def gestion(request):
+    return render(request, 'acme/gestion-productos.html', {})
