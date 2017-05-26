@@ -15,7 +15,7 @@ from django.contrib.auth import authenticate, login
 #from acme.models import UserProfile
 from django.template.context_processors import csrf
 
-from acme.forms import UserForm, VendFijoForm
+from acme.forms import UserForm, VendFijoForm, VendAmbForm
 
 
 def index(request):
@@ -31,20 +31,18 @@ def signup(request):
     return render(request, 'acme/profile.html', {})
 
 def signupClient(request):
-    print request.method
     if request.method == 'POST':
         form = UserForm(request.POST)
-        print form.is_valid()
         print form.errors
         #profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():# and profile_form.is_valid():
-            form.save()
+            user = form.save()
+            user.save()
             HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
             #messages.success(request, ('Your profile was successfully updated!'))
             #return redirect('settings:profile')
     else:
-        print "no"
         form = UserForm()
         #profile_form = ProfileForm(instance=request.user.profile)
     args = {}
@@ -53,21 +51,19 @@ def signupClient(request):
     return render(request, 'acme/signupCliente.html', args)
 
 def signupVendAmb(request):
-    print request.method
     if request.method == 'POST':
-        form = UserForm(request.POST)
-        print form.is_valid()
+        form = VendAmbForm(request.POST)
         print form.errors
         #profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():# and profile_form.is_valid():
-            form.save()
-            HttpResponseRedirect('/accounts/loggedin/')
+            user = form.save()
+            user.save()
+            #HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
             #messages.success(request, ('Your profile was successfully updated!'))
             #return redirect('settings:profile')
     else:
-        print "no"
-        form = UserForm()
+        form = VendAmbForm()
         #profile_form = ProfileForm(instance=request.user.profile)
     args = {}
     args.update(csrf(request))
@@ -84,10 +80,9 @@ def signupVendFijo(request):
             #profile_form.save()
             user.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            #return redirect('settings:profile')
+           #return redirect('acme/login.html')
     else:
         form = VendFijoForm()
-
     args = {}
     args.update(csrf(request))
     args['form'] = form
