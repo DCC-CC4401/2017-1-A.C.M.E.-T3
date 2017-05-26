@@ -2,8 +2,7 @@
 
 {% block content %}
 
-<h2> Hi {{ full_name }} you are now logged in!</h2>
-<p>Click <a href="/accounts/logout/">here</a> to logout</p>
-<p>Click <a href="/accounts/profile/">here</a> to edit your profile</p>
+    <div style="text-align: center"><h5 class="teal-text" style="text-align: center;">Ya estas registrado</h5></div>
+    <div style="text-align: center;"><a class="grey-text"> Para volver a la página principal </a><a href="{% url 'index' %}">haz click aquí</a></div>
 
 {% endblock %}

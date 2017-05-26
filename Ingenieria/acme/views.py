@@ -18,8 +18,14 @@ from django.template.context_processors import csrf
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
 
 
-def index(request):
+def indexNotRegister(request):
     return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada
+
+def indexRegister(request):
+    return render(request, 'acme/init_register.html', {}) #va a construir lo puesto en la planilla .html senhalada
+
+def register(request):
+    return render(request, 'acme/loggedin.html',{})
 
 def login(request):
     return render(request, 'acme/login.html', {}) #va a construir lo puesto en la planilla .html senhalada
@@ -38,10 +44,10 @@ def signupClient(request):
         if form.is_valid():# and profile_form.is_valid():
             user = form.save()
             user.save()
-            HttpResponseRedirect('/accounts/loggedin/')
+            #HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
             #messages.success(request, ('Your profile was successfully updated!'))
-            #return redirect('settings:profile')
+            return redirect('Register')
     else:
         form = UserForm()
         #profile_form = ProfileForm(instance=request.user.profile)
@@ -61,7 +67,7 @@ def signupVendAmb(request):
             #HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
             #messages.success(request, ('Your profile was successfully updated!'))
-            #return redirect('settings:profile')
+            return redirect('Register')
     else:
         form = VendAmbForm()
         #profile_form = ProfileForm(instance=request.user.profile)
@@ -79,8 +85,8 @@ def signupVendFijo(request):
             #HttpResponseRedirect('/accounts/loggedin/')
             #profile_form.save()
             user.save()
-            messages.success(request, ('Your profile was successfully updated!'))
-           #return redirect('acme/login.html')
+            #messages.success(request, ('Your profile was successfully updated!'))
+            return redirect('Register')
     else:
         form = VendFijoForm()
     args = {}
