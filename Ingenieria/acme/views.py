@@ -39,18 +39,12 @@ def signup(request):
 def signupClient(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        print form.errors
-        #profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if form.is_valid():# and profile_form.is_valid():
+        if form.is_valid():
             user = form.save()
             user.save()
-            #HttpResponseRedirect('/accounts/loggedin/')
-            #profile_form.save()
-            #messages.success(request, ('Your profile was successfully updated!'))
             return redirect('Register')
     else:
         form = UserForm()
-        #profile_form = ProfileForm(instance=request.user.profile)
     args = {}
     args.update(csrf(request))
     args['form'] = form
@@ -59,18 +53,12 @@ def signupClient(request):
 def signupVendAmb(request):
     if request.method == 'POST':
         form = VendAmbForm(request.POST)
-        print form.errors
-        #profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if form.is_valid():# and profile_form.is_valid():
+        if form.is_valid():
             user = form.save()
             user.save()
-            #HttpResponseRedirect('/accounts/loggedin/')
-            #profile_form.save()
-            #messages.success(request, ('Your profile was successfully updated!'))
             return redirect('Register')
     else:
         form = VendAmbForm()
-        #profile_form = ProfileForm(instance=request.user.profile)
     args = {}
     args.update(csrf(request))
     args['form'] = form
@@ -79,13 +67,9 @@ def signupVendAmb(request):
 def signupVendFijo(request):
     if request.method == 'POST':
         form = VendFijoForm(request.POST)
-        print form.errors
-        if form.is_valid():# and profile_form.is_valid():
+        if form.is_valid():
             user = form.save()
-            #HttpResponseRedirect('/accounts/loggedin/')
-            #profile_form.save()
             user.save()
-            #messages.success(request, ('Your profile was successfully updated!'))
             return redirect('Register')
     else:
         form = VendFijoForm()

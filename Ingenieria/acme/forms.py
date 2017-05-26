@@ -79,7 +79,6 @@ class VendFijoForm(UserCreationForm):
 
 
 class UserForm(UserCreationForm):
-    # Nuevos campos escritos deben ser convertidos en form
     email = forms.EmailField(required=True)
     username = forms.CharField(max_length=200, required=True)
     first_name = forms.CharField(max_length=200, required=True)

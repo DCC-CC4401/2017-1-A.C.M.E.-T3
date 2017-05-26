@@ -46,6 +46,8 @@
                         </div>
                     </div>
 
+                    <div style="color: red">{{ form.username.errors }}</div>
+
                     <div class='row'>
                         <div class='input-field col s12 m12'>
                             <label for={{ form.username.id_for_label }}> Usuario: </label> {{ form.username }}
@@ -86,9 +88,12 @@
                         </div>
                     </div>
 
+                    <div style="color: red">{{ form.password2.errors }}</div>
+
                     <div class='row'>
                         <div class='input-field col s12 m12'>
-                            <label for="{{ form.password2.id_for_label }}"> Repite tu contraseña: </label> {{ form.password2 }}
+                            <label for="{{ form.password2.id_for_label }}"> Repite tu
+                                contraseña: </label> {{ form.password2 }}
                         </div>
                     </div>
 
