@@ -1,12 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from django.core.files.images import get_image_dimensions
 from acme.models import ClientProfile, VendedorFijoProfile, VendedorAmbProfile
-
-CHOICES = [('../static/img/AvatarVendedor3.png', ), ('../static/img/AvatarVendedor2.png', 'test2'),
-           ('../static/img/AvatarVendedor3.png', 'test3'), ('../static/img/AvatarVendedor4.png', 'test4')]
-
 
 class VendAmbForm(UserCreationForm):
     email = forms.EmailField(required=True)
