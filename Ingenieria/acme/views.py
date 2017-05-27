@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
-
+def vendedor(request):
+    return render(request, 'acme/vendedor-profile-page.html', {})
 
 def indexNotRegister(request):
     return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada

@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^signup-Client/', views.signupClient, name='signupCliente'),
     url(r'^signup-Vendedor-Fijo/', views.signupVendFijo, name='signupFijo'),
     url(r'^signup-Vendedor-Ambulante/', views.signupVendAmb, name='signupAmb'),
+    url(r'^vendedor/', views.vendedor, name='perfil-vendedor'),
 ]
