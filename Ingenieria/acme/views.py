@@ -5,13 +5,14 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
+from acme.models import VendedorAmbProfile
 
 
 def indexNotRegister(request):
     return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
-def indexRegister(request):
-    return render(request, 'acme/init_register.html', {}) #va a construir lo puesto en la planilla .html senhalada
+#def indexRegister(request):
+#    return render(request, 'acme/../loginApp/templates/loginApp/init_register.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
 def register(request):
     return render(request, 'acme/loggedin.html',{})
@@ -28,7 +29,7 @@ def signupClient(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = UserForm()
     args = {}
@@ -42,7 +43,7 @@ def signupVendAmb(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = VendAmbForm()
     args = {}
@@ -56,7 +57,7 @@ def signupVendFijo(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = VendFijoForm()
     args = {}

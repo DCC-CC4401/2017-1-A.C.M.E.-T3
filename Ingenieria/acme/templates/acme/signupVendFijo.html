@@ -27,9 +27,9 @@
 
                     <div class="input-field col s12 m12">
                         <select onchange="location=this.value">
-                            <option value="{% url 'signupFijo' %}" disabled selected>Vendedor fijo</option>
-                            <option value="{% url 'signupAmb' %}">Vendedor móvil</option>
-                            <option value="{% url 'signupCliente' %}">Cliente</option>
+                            <option value="{% url 'acme:signupFijo' %}" disabled selected>Vendedor fijo</option>
+                            <option value="{% url 'acme:signupAmb' %}">Vendedor móvil</option>
+                            <option value="{% url 'acme:signupCliente' %}">Cliente</option>
                         </select>
                         <label>Tipo de Usuario</label>
                     </div>
@@ -118,7 +118,7 @@
                 </form>
             </div>
         </div>
-        <div style="text-align: center;"><a class="grey-text"> ¿Ya tienes una cuenta? </a><a href="{% url 'login' %}">Inicia
+        <div style="text-align: center;"><a class="grey-text"> ¿Ya tienes una cuenta? </a><a href="{% url 'acme:login' %}">Inicia
             sesión</a></div>
 
 

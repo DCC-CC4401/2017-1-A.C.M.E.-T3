@@ -1,6 +1,14 @@
 {% extends 'acme/base.html' %}
 {% block content %}
-	<div>
-        <a href="#" class="brand-logo right"><img style="max-height: 600px!important;  padding: 2px 0px!important;" src="../static/img/mapNotRegister.png"></a>
-    </div>
+    {% if not user.is_authenticated %}
+        <div>
+            <a href="#" class="brand-logo right"><img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                                                      src="../static/img/mapNotRegister.png"></a>
+        </div>
+    {% else %}
+        <div>
+            <a href="#" class="brand-logo right"><img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                                                      src="../static/img/map.png"></a>
+        </div>
+    {% endif %}
 {% endblock %}
