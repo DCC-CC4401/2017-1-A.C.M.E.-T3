@@ -4,6 +4,10 @@ from django import forms
 from django.core.files.images import get_image_dimensions
 from acme.models import ClientProfile, VendedorFijoProfile, VendedorAmbProfile
 
+CHOICES = [('../static/img/AvatarVendedor3.png', ), ('../static/img/AvatarVendedor2.png', 'test2'),
+           ('../static/img/AvatarVendedor3.png', 'test3'), ('../static/img/AvatarVendedor4.png', 'test4')]
+
+
 class VendAmbForm(UserCreationForm):
     email = forms.EmailField(required=True)
     username = forms.CharField(max_length=200, required=True)
@@ -18,7 +22,8 @@ class VendAmbForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username', 'email', 'password1', 'password2', 'last_name', 'first_name', 'cash', 'debit', 'credit', 'student')
+            'username', 'email', 'password1', 'password2', 'last_name', 'first_name', 'cash', 'debit', 'credit',
+            'student')
 
     def save(self, commit=True):
         user = super(VendAmbForm, self).save(commit=True)
@@ -55,7 +60,8 @@ class VendFijoForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username', 'email', 'password1', 'password2', 'init_time', 'end_time', 'cash', 'debit', 'credit', 'student',
+            'username', 'email', 'password1', 'password2', 'init_time', 'end_time', 'cash', 'debit', 'credit',
+            'student',
             'first_name', 'last_name')
 
     def save(self, commit=True):
