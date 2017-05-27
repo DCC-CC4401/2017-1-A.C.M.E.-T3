@@ -121,4 +121,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_R00T = os.path.join(BASE_DIR,'static')
-
