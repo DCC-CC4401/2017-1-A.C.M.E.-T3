@@ -1,18 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
-from django.db import transaction
-from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-
-#from acme.forms import UserForm, UserProfileForm
-#from acme.models import UserProfile
 from django.template.context_processors import csrf
 
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
@@ -29,9 +18,6 @@ def register(request):
 
 def login(request):
     return render(request, 'acme/login.html', {}) #va a construir lo puesto en la planilla .html senhalada
-
-#def signup(request):
-#    return render(request, 'acme/signup.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
 def signup(request):
     return render(request, 'acme/profile.html', {})

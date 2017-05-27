@@ -2,9 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import SET_NULL
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 class Product(models.Model):
     cost = models.PositiveIntegerField()
@@ -12,6 +9,9 @@ class Product(models.Model):
     description = models.TextField(max_length=300)
     stock = models.PositiveIntegerField()
     avatar = models.ImageField(default="acme/img/pollo1.png")
+
+    def __str__(self):
+        return self.name
 
 
 class VendedorFijoProfile(models.Model):
@@ -26,6 +26,9 @@ class VendedorFijoProfile(models.Model):
     debit = models.BooleanField(default=False)
     student = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
 
 class VendedorAmbProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -38,7 +41,13 @@ class VendedorAmbProfile(models.Model):
     debit = models.BooleanField(default=False)
     student = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default="acme/img/AvatarEstudiante.png")
+
+    def __str__(self):
+        return self.user.username
 
