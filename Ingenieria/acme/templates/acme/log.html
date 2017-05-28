@@ -37,11 +37,11 @@
 
     <div class="section"></div>
     <div class="section"></div>
-    <h5 class="teal-text" style="text-align: center;">Felicitaciones! Has sido registrado exitosamente</h5></div>
-        <div style="text-align: center;"><a class="grey-text"> Para iniciar sesión </a><a
-                href="/login/">haz click aquí</a></div>
-        <div style="text-align: center;"><a class="grey-text"> Para volver a la página principal </a><a
-                href="{% url 'acme:index' %}">haz click aquí</a></div>
+    <h5 class="teal-text" style="text-align: center;">Hola {{ full_name }}. Bienvenido a la página </h5></div>
+    <div style="text-align: center;"><a class="grey-text"> Para cerrar sesión </a><a
+            href="/logout/">haz click aquí</a></div>
+    <div style="text-align: center;"><a class="grey-text"> Para volver a la página inicial </a><a
+            href={% url 'acme:index' %}>haz click aquí</a></div>
 
 </body>
 

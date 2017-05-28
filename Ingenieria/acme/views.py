@@ -12,14 +12,8 @@ def vendedor(request):
 def indexNotRegister(request):
     return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
-def indexRegister(request):
-    return render(request, 'acme/init_register.html', {}) #va a construir lo puesto en la planilla .html senhalada
-
 def register(request):
     return render(request, 'acme/loggedin.html',{})
-
-def login(request):
-    return render(request, 'acme/login.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
 def signup(request):
     return render(request, 'acme/profile.html', {})
@@ -30,7 +24,7 @@ def signupClient(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = UserForm()
     args = {}
@@ -44,7 +38,7 @@ def signupVendAmb(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = VendAmbForm()
     args = {}
@@ -58,7 +52,7 @@ def signupVendFijo(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            return redirect('Register')
+            return redirect('acme:Register')
     else:
         form = VendFijoForm()
     args = {}

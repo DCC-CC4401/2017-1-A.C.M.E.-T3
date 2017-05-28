@@ -8,7 +8,7 @@ class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(max_length=300)
     stock = models.PositiveIntegerField()
-    avatar = models.ImageField(default="acme/img/pollo1.png")
+    avatar = models.ImageField(upload_to='photos',blank=True)
     vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class VendedorFijoProfile(models.Model):
     init_time = models.TimeField()
     end_time = models.TimeField()
     likes = models.PositiveIntegerField(default=0)
-    avatar = models.ImageField(default="acme/img/AvatarVendedor1.png")
+    avatar = models.ImageField(upload_to='photos',blank=True)
     cash = models.BooleanField(default=True)
     credit = models.BooleanField(default=False)
     debit = models.BooleanField(default=False)
@@ -32,7 +32,7 @@ class VendedorFijoProfile(models.Model):
 class VendedorAmbProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     check = models.BooleanField(default=False)
-    avatar = models.ImageField(default="acme/img/AvatarVendedor4.png")
+    avatar = models.ImageField(upload_to='photos',blank=True)
     likes = models.PositiveIntegerField(default=0)
     cash = models.BooleanField(default=True)
     credit = models.BooleanField(default=False)
@@ -44,7 +44,7 @@ class VendedorAmbProfile(models.Model):
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default="acme/img/AvatarEstudiante.png")
+    avatar = models.ImageField(upload_to='photos',blank=True)
     favVendFijo = models.ManyToManyField(VendedorFijoProfile, blank=True)
     favVendAmb = models.ManyToManyField(VendedorAmbProfile, blank=True)
 
