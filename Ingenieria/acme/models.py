@@ -4,12 +4,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Product(models.Model):
-    cost = models.PositiveIntegerField()
+    cost = models.IntegerField()
     name = models.CharField(max_length=30)
-    description = models.TextField(max_length=300)
-    stock = models.PositiveIntegerField()
-    avatar = models.ImageField(upload_to='photos',blank=True)
-    vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    description = models.CharField(max_length=300)
+    stock = models.IntegerField()
+    avatar = models.ImageField(upload_to='photos')
+    #vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name

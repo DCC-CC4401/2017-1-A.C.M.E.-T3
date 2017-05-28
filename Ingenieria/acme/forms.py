@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from acme.models import ClientProfile, VendedorFijoProfile, VendedorAmbProfile
+from acme.models import ClientProfile, VendedorFijoProfile, VendedorAmbProfile, Product
 
 class VendAmbForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -37,7 +37,6 @@ class VendAmbForm(UserCreationForm):
         if password1 != password2:
             raise forms.ValidationError("password must match")
         return password1
-
 
 class VendFijoForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -78,7 +77,6 @@ class VendFijoForm(UserCreationForm):
             raise forms.ValidationError("password must match")
         return password1
 
-
 class UserForm(UserCreationForm):
     email = forms.EmailField(required=True)
     username = forms.CharField(max_length=200, required=True)
@@ -105,3 +103,23 @@ class UserForm(UserCreationForm):
         if password1 != password2:
             raise forms.ValidationError("password must match")
         return password1
+
+class ProductForm(forms.ModelForm):
+    name = forms.CharField(required=True)
+    cost = forms.IntegerField(required=True)
+    stock = forms.IntegerField(required=True)
+    description = forms.CharField(max_length=300, required=False)
+    avatar = forms.ImageField(required=False)
+
+    class Meta:
+        model = Product
+        fields = ('cost', 'name', 'description', 'stock', 'avatar')
+
+    def save(self, commit=True):
+        prod = Product(cost=self.cleaned_data['cost'],
+                         name=self.cleaned_data['name'],
+                         stock=self.cleaned_data['stock'],
+                         description=self.cleaned_data['description'],
+                         avatar=self.cleaned_data['avatar'])
+        prod.save()
+        return prod

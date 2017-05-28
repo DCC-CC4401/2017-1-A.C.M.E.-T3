@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 
-from acme.forms import UserForm, VendFijoForm, VendAmbForm
-
+from acme.forms import UserForm, VendFijoForm, VendAmbForm, ProductForm
 
 def indexNotRegister(request):
     return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada
@@ -57,4 +56,18 @@ def signupVendFijo(request):
     args.update(csrf(request))
     args['form'] = form
     return render(request, 'acme/signupVendFijo.html', args)
+
+def gestion(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.save()
+            return redirect('acme:Register')
+    else:
+        form = ProductForm()
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    return render(request, 'acme/gestion-productos.html', args)
 
