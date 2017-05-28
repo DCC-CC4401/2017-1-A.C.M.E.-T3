@@ -44,8 +44,7 @@
                     </div>
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
-                {% csrf_token %}
-                <li><a href="{% url 'login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
+               <li><a href="{% url 'login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
             {% else %}
                 <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y">
                 <li>
@@ -56,58 +55,42 @@
                             <img src="../static/img/background4.png">
                         </div>
                         {% if user.vendedorambprofile %}
-                            <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                  src="{{ user.vendedorambprofile.avatar.url }}"></a>
+                            {% if user.vendedorambprofile.avatar %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="{{ user.vendedorambprofile.avatar.url }}"></a>
+                            {% else %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="../static/img/AvatarVendedor1.png"></a>
+                            {% endif %}
                         {% elif user.vendedorfijoprofile %}
-                            <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                  src="{{ user.vendedorfijoprofile.avatar.url }}"></a>
+                            {% if user.vendedorfijoprofile.avatar %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="{{ user.vendedorfijoprofile.avatar.url }}"></a>
+                            {% else %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="../static/img/AvatarVendedor1.png"></a>
+                            {% endif %}
                         {% else %}
-                            <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                  src="{{ user.clientprofile.avatar.url }}"></a>
+                            {% if user.clientprofile.avatar %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="{{ user.clientprofile.avatar.url }}"></a>
+                            {% else %}
+                                <a href="#!user"><img style="margin-top: 16%;" class="circle"
+                                                      src="../static/img/AvatarEstudiante.png"></a>
+                            {% endif %}
                         {% endif %}
                         <a href="#!name"><span style="margin-left: 5%;"
                                                class="white-text name">{{ user.username }}</span></a>
                     </div>
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
-                {% if not user.clientprofile %}
+                {% if not user.clientprofile %} <!--cambiar esto a la página de perfil del usuario-->
                     <li><a href="{% url 'acme:index' %}"><i
                             class="material-icons">perm_identity</i>Perfil</a></li>
                 {% endif %}
-                <li><a href="{% url 'acme:index' %}"><i class="material-icons">exit_to_app</i>Cerrar
+                <li><a href="/logout/"><i class="material-icons">exit_to_app</i>Cerrar
                     Sesión</a></li>
             {% endif %}
-            <!--<li><div class="divider"></div></li>
-            <li><a class="subheader">Activo</a></li>
-            <li>
-                <div class="switch" style="margin-left: 80px;">
-                    <label>
-                        No<input type="checkbox"><span class="lever"></span>Si
-                    </label>
-                </div>
-            </li>
-            <li><a class="subheader">Filtros</a></li>
-            <li>
-                <div class="switch" style="margin-left: 10px;">
-                    <label>
-                        <input type="checkbox"><span class="lever"></span>Sólo mostrar favoritos
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="switch" style="margin-left: 10px;">
-                    <label>
-                        <input type="checkbox"><span class="lever"></span>Snacks
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div class="switch" style="margin-left: 10px;">
-                    <label>
-                        <input type="checkbox"><span class="lever"></span>Almuerzos
-                    </label>
-                </div>
-            </li>-->
             </ul>
         </div>
     </nav>

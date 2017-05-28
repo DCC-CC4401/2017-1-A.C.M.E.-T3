@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'', include('acme.urls', namespace='acme')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^auth/$',views.auth_view),
-    url(r'^login/$',views.login,name='login'), #{'template_name':'acme/login.html'},name='acme_login'),
-    url(r'^logout/$',views.logout), #{'next_page':  reverse_lazy('marcador_bookmark_list')}, name='acme_logout')
+    url(r'^login/$',views.login,name='login'),
+    url(r'^logout/$',views.logout,name='logout'),
     url(r'^log/$', views.log, name='log'),
     url(r'^invalid_login/$',views.invalid_login, name='invalid_login'),
 ]

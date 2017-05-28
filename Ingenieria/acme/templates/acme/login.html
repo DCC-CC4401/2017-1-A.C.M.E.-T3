@@ -7,9 +7,6 @@
 {% endblock %}
 
 {% block content %}
-    {% if form.errors %}
-        <p class="errors"> La contraseña o el usuario ingresado no son válidos </p>
-    {% endif %}
     <div class="section"></div>
     <main>
         <div class="section"></div>
@@ -26,11 +23,10 @@
                         </div>
                     </div>
                     {% csrf_token %}
-
                     <div class='row'>
                         <div class='input-field col s12'>
                             <input class='validate' type='text' name='username' id='username'/>
-                            <label style="text-align: center;" for='username'>Ingresa tu correo</label>
+                            <label style="text-align: center;" for='username'>Ingresa tu nombre de usuario</label>
                         </div>
                     </div>
 
@@ -43,7 +39,6 @@
                             <a class='red-text text-accent-2' href='#!'><b>¿Olvidaste tu contraseña?</b></a>
                         </label>
                     </div>
-
                     <div class='row'>
                         <input type='submit' class='col l6 offset-l3 btn btn-large waves-effect teal'
                                value="Iniciar sesión" /></div>
