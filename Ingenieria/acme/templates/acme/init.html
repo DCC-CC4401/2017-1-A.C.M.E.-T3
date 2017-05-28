@@ -31,45 +31,83 @@
             {% endif %}
         </div>
     {% else %}
-        {% if user.clientprofile %}
-            <div class="brand-logo right">
-                {% if usersfijo and useramb %}
+        <div class="brand-logo right">
+            {% if user.clientprofile %}
+                {% if fijoFav and ambFav %}
                     <img style="max-height: 600px!important;  padding: 2px 0px!important;"
-                         src="../static/img/map21.png" usemap="#Map"/>
-                    <map name="Map">
+                         src="../static/img/map2fav.png" usemap="#Map6"/>
+                    <map name="Map6">
                         <area shape="rect" coords="550,160,590,210" alt="notfav"
-                              href={% url 'acme:ViewClient' usersfijo.user.username %}>
-                        <area shape="rect" coords="540,260,575,310" alt="notfav"
-                              href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                              href={% url 'acme:ViewClient' fijoFav.user.username %}>
                         <area shape="rect" coords="590,380,625,430" alt="notfav"
-                              href={% url 'acme:ViewClient2' useramb.user.username %}>
+                              href={% url 'acme:ViewClient2' ambFav.user.username %}>
                     </map>
-                {% elif useramb %}
-                    <img style="max-height: 600px!important;  padding: 2px 0px!important;"
-                         src="../static/img/map11.png" usemap="#Map2"/>
-                    <map name="Map2">
-                        <area shape="rect" coords="590,380,625,430" alt="notfav"
-                              href={% url 'acme:ViewClient2' useramb.user.username %}>
-                        <area shape="rect" coords="540,260,575,310" alt="notfav"
-                              href={% url 'acme:ViewClient' useramb.user.username %}>
-                    </map>
-                {% elif usersfijo %}
-                    <img style="max-height: 600px!important;  padding: 2px 0px!important;"
-                         src="../static/img/map21fijo.png" usemap="#Map3"/>
-                    <map name="Map3">
-                        <area shape="rect" coords="550,160,590,210" alt="notfav"
-                              href={% url 'acme:ViewClient' usersfijo.user.username %}>
-                        <area shape="rect" coords="540,260,575,310" alt="notfav"
-                              href={% url 'acme:ViewClient' usersfijo.user.username %}>
-                    </map>
+                {% elif fijoFav %}
+                    {% if useramb %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/1favfij1amb.png" usemap="#Map8"/>
+                        <map name="Map8">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' fijoFav.user.username %}>
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/1favfij.png" usemap="#Map8"/>
+                        <map name="Map8">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' fijoFav.user.username %}>
+                        </map>
+                    {% endif %}
+                {% elif ambFav %}
+                    {% if usersfijo %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/1favamb1fij.png" usemap="#Map12"/>
+                        <map name="Map12">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient' ambFav.user.username %}>
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/1favamb.png" usemap="#Map12"/>
+                        <map name="Map12">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient' ambFav.user.username %}>
+                        </map>
+                    {% endif %}
                 {% else %}
-                    <img style="max-height: 600px!important;  padding: 2px 0px!important;"
-                         src="../static/img/mapNotRegister3.png"/>
+                    {% if usersfijo and useramb %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/mapNotRegister2.png" usemap="#Map"/>
+                        <map name="Map">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% elif useramb %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/mapNotRegister1.png" usemap="#Map2"/>
+                        <map name="Map2">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% elif usersfijo %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/mapNotRegister4.png" usemap="#Map3"/>
+                        <map name="Map3">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="max-height: 600px!important;  padding: 2px 0px!important;"
+                             src="../static/img/mapNotRegister3.png"/>
+                    {% endif %}
                 {% endif %}
-            </div>
-        {% else %}
-            <img style="max-height: 600px!important;  padding: 2px 0px!important;"
-                 src="../static/img/mapNotRegister3.png"/>
-        {% endif %}
+            {% endif %}
+        </div>
     {% endif %}
 {% endblock %}

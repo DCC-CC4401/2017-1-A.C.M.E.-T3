@@ -11,10 +11,33 @@ from acme.models import *
 def indexNotRegister(request):
     userfijo = VendedorFijoProfile.objects.all()
     useramb = VendedorAmbProfile.objects.all()
+    if request.user.is_authenticated():
+        if ClientProfile.objects.filter(user=request.user):
+            ambFav = ClientProfile.objects.get(user=request.user).favVendAmb.all()
+            fijoFav = ClientProfile.objects.get(user=request.user).favVendFijo.all()
+            if ambFav:
+                ambFav = ambFav[0]
+                if userfijo:
+                    print "hola"
+                    userfijo = userfijo[0]
+                if useramb:
+                    useramb = None
+            if fijoFav:
+                fijoFav = fijoFav[0]
+                if userfijo:
+                    userfijo = None
+                if useramb:
+                    useramb = useramb[0]
+            if not fijoFav and not ambFav:
+                if userfijo:
+                    userfijo = userfijo[0]
+                if useramb:
+                    useramb = useramb[0]
+            return render(request, 'acme/init.html', {'usersfijo': userfijo, 'useramb': useramb, 'ambFav': ambFav, 'fijoFav': fijoFav})
     if userfijo:
-        userfijo = VendedorFijoProfile.objects.all()[0]
+        userfijo = userfijo[0]
     if useramb:
-        useramb = VendedorAmbProfile.objects.all()[0]
+        useramb = useramb[0]
     return render(request, 'acme/init.html', {'usersfijo': userfijo, 'useramb': useramb}) #va a construir lo puesto en la planilla .html senhalada
 
 def register(request):
@@ -73,8 +96,4 @@ def viewClientFijo(request, usuario):
 
 def viewClientAmb(request, usuario):
     #query_result_amb = VendedorAmbProfile.objects.all()
-    return render(request, 'acme/profile.html', {})# {'users':users})
-
-def viewClientFav(request, usuario):
-    #query_result_fav = ClientProfile.objects.get(user_id=request)
     return render(request, 'acme/profile.html', {})# {'users':users})

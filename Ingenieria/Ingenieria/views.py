@@ -4,17 +4,6 @@ from django.template.context_processors import csrf
 
 from acme.models import *
 
-
-def indexRegister(request):
-    userfijo = VendedorFijoProfile.objects.all()
-    useramb = VendedorAmbProfile.objects.all()
-    print request
-    if userfijo:
-        userfijo = VendedorFijoProfile.objects.all()[0]
-    if useramb:
-        useramb = VendedorAmbProfile.objects.all()[0]
-    return render(request, 'acme/initRegister.html', {'usersfijo': userfijo, 'useramb': useramb}) #va a construir lo puesto en la planilla .html senhalada
-
 def login(request):
     c = {}
     c.update(csrf(request))

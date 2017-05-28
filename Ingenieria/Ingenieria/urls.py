@@ -27,5 +27,4 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^log/$', views.log, name='log'),
     url(r'^invalid_login/$', views.invalid_login, name='invalid_login'),
-    url(r'^/$', views.indexRegister, name='indexRegister'),
 ]
