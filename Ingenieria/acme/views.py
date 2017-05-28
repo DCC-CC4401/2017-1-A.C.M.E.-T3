@@ -63,4 +63,6 @@ def signupVendFijo(request):
     return render(request, 'acme/signupVendFijo.html', args)
 
 def perfil(request):
+    username = request.user
+    print (username)
     return render(request, 'acme/vendedor-profile-page.html',{})
