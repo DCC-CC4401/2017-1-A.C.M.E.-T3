@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 
@@ -64,3 +65,6 @@ def signupVendFijo(request):
     args.update(csrf(request))
     args['form'] = form
     return render(request, 'acme/signupVendFijo.html', args)
+
+def prueba(request,pk ,po):
+    return HttpResponse(pk+""+po)
