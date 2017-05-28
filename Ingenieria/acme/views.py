@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import csrf
 
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
+from acme.models import *
 
 
 def indexNotRegister(request):
-    return render(request, 'acme/init.html', {}) #va a construir lo puesto en la planilla .html senhalada
+    userfijo = VendedorFijoProfile.objects.all()
+    useramb = VendedorAmbProfile.objects.all()
+    if userfijo:
+        userfijo = VendedorFijoProfile.objects.all()[0]
+    if useramb:
+        useramb = VendedorAmbProfile.objects.all()[0]
+    return render(request, 'acme/init.html', {'usersfijo': userfijo, 'useramb': useramb}) #va a construir lo puesto en la planilla .html senhalada
 
 def register(request):
     return render(request, 'acme/loggedin.html',{})
@@ -57,3 +64,17 @@ def signupVendFijo(request):
     args.update(csrf(request))
     args['form'] = form
     return render(request, 'acme/signupVendFijo.html', args)
+
+
+def viewClientFijo(request, usuario):
+    #users = get_object_or_404(VendedorFijoProfile, username = usuario)
+    #print users
+    return render(request, 'acme/profile.html', {})# {'users':users})
+
+def viewClientAmb(request, usuario):
+    #query_result_amb = VendedorAmbProfile.objects.all()
+    return render(request, 'acme/profile.html', {})# {'users':users})
+
+def viewClientFav(request, usuario):
+    #query_result_fav = ClientProfile.objects.get(user_id=request)
+    return render(request, 'acme/profile.html', {})# {'users':users})
