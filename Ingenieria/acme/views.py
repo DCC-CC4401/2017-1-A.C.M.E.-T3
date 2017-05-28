@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from datetime import datetime, date, time, timedelta
 import calendar
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
+from acme.models import Product
 
 
 def vendedor(request):
@@ -64,5 +66,6 @@ def signupVendFijo(request):
 
 def perfil(request):
     username = request.user
-    print (username)
-    return render(request, 'acme/vendedor-profile-page.html',{})
+    productos= Product.objects.filter(vendedor=username)
+    print (productos)
+    return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
