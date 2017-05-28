@@ -1,0 +1,13 @@
+{% extends 'acme/base.html' %}
+
+{% block content %}
+    <div class="section"></div>
+    <main>
+        <div class="section"></div>
+        <h5 class="teal-text" style="text-align: center;">Hola {{ full_name }}. Bienvenido a la página </h5></div>
+        <div style="text-align: center;"><a class="grey-text"> Para cerrar sesión </a><a
+                href="/logout/">haz click aquí</a></div>
+        <div style="text-align: center;"><a class="grey-text"> Para volver a la página inicial </a><a
+                href={% url 'acme:index' %}>haz click aquí</a></div>
+    </main>
+{% endblock %}

@@ -45,7 +45,7 @@
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
                 {% csrf_token %}
-                <li><a href="{% url 'acme:login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
+                <li><a href="{% url 'login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
             {% else %}
                 <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y">
                 <li>

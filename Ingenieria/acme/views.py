@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, render_to_response
 from django.template.context_processors import csrf
 
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
@@ -17,8 +19,8 @@ def indexNotRegister(request):
 def register(request):
     return render(request, 'acme/loggedin.html',{})
 
-def login(request):
-    return render(request, 'acme/login.html', {}) #va a construir lo puesto en la planilla .html senhalada
+#def login(request):
+#    return render(request, 'acme/login.html', {}) #va a construir lo puesto en la planilla .html senhalada
 
 def signup(request):
     return render(request, 'acme/profile.html', {})

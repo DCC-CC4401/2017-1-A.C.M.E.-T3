@@ -1,0 +1,13 @@
+{% extends 'acme/base.html' %}
+
+{% block content %}
+    <div class="section"></div>
+    <main>
+        <div class="section"></div>
+        <h5 class="teal-text" style="text-align: center;">No se ha podido iniciar sesión </h5></div>
+        <div style="text-align: center;"><a class="grey-text"> Para volver a intentarlo </a><a
+                href="/login/">haz click aquí</a></div>
+        <div style="text-align: center;"><a class="grey-text"> Para volver a la página inicial </a><a
+                href={% url 'acme:index' %}>haz click aquí</a></div>
+    </main>
+{% endblock %}

@@ -17,10 +17,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
 
+from Ingenieria import views
+
 urlpatterns = [
     url(r'', include('acme.urls', namespace='acme')),
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^login/$','django.contrib.auth.views.login', {'template_name':'acme/login.html'},name='acme_login'),
-    #url(r'^logout/$','django.contrib.auth.views.logout', {'next_page':  reverse_lazy('marcador_bookmark_list')}, name='acme_logout')
-
+    url(r'^auth/$',views.auth_view),
+    url(r'^login/$',views.login,name='login'), #{'template_name':'acme/login.html'},name='acme_login'),
+    url(r'^logout/$',views.logout), #{'next_page':  reverse_lazy('marcador_bookmark_list')}, name='acme_logout')
+    url(r'^log/$', views.log, name='log'),
+    url(r'^invalid_login/$',views.invalid_login, name='invalid_login'),
 ]
