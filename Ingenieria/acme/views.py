@@ -220,9 +220,18 @@ def modificar(request):
     id = request.GET.get('id','')
     p = Product.objects.get(pk=id)
     if request.method == 'POST':
+        if request.POST.get('type') == 'ELIMINAR':
+            p.delete()
+            return redirect('acme:perfil')
+
         p.name = request.POST.get('name', p.name)
-        f = p.save()
-        f.save()
+        p.stock = request.POST.get('stock', p.stock)
+        p.description = request.POST.get('description', p.description)
+        p.cost = request.POST.get('cost', p.cost)
+        p.category = request.POST.get('category', p.category)
+        if request.FILES.__len__() != 0:
+            p.photo = request.FILES.get('photo', None)
+        p.save()
         return redirect('acme:perfil')
 
     else:
@@ -230,4 +239,4 @@ def modificar(request):
     args = {}
     args.update(csrf(request))
     args['form'] = form
-    return render(request, 'acme/gestion-productos.html', args)
+    return render(request, 'acme/modificar-producto.html', {'producto':p})

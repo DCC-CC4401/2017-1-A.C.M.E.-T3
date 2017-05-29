@@ -4,16 +4,19 @@
 <main>
 <div class="section"></div>
 
-      <h4 class="teal-text" style="text-align: center;">Agregar Item</h4>
+      <h4 class="teal-text" style="text-align: center;">Modificar Item</h4>
       <div class="section"></div>
 
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="margin-left: 5%; margin-right: 5%; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form action="/gestion/" method="post" enctype="multipart/form-data">{% csrf_token %}
+          <form action="/modificar/?id={{ producto.id }}" method="post" enctype="multipart/form-data">{% csrf_token %}
 
               <div class='row'>
-                <input type="submit" class='col offset-l4 btn waves-effect button teal save btn btn-default'></input>
+                  <input type="submit" class='col offset-l4 btn waves-effect button teal save btn btn-default'></input>
+
+                  <input value="ELIMINAR" name='type' id='type' type="submit" class='col offset-l4 btn waves-effect button teal btn btn-default'></input>
+
               </div>
 
 
@@ -24,19 +27,9 @@
 
             <div class='row'>
               <div class='input-field col s12 m12'>
-                  Nombre del producto:
+                  &ensp;Nombre del producto:
                  <div class="input-field inline ">
-                 <label for="{{ form.name.id_for_label }}"></label> {{ form.name }}
-                <label style="text-align: center" for='item'></label>
-                 </div>
-              </div>
-            </div>
-
-          <div class='row'>
-              <div class='input-field col s12 m12'>
-                  Categoria del producto:
-                 <div class="input-field inline ">
-                 <label for="{{ form.category.id_for_label }}"></label> {{ form.category }}
+                <input value="{{ producto.name }}" class='validate' type='text' name='name' id='name' />
                 <label style="text-align: center" for='item'></label>
                  </div>
               </div>
@@ -46,7 +39,16 @@
               <div class='input-field col s12 m12'>
                   &ensp;Precio del producto:
                   <div class="input-field inline">
-                  <label for="{{ form.cost.id_for_label }}"></label> {{ form.cost }}
+                <input value="{{ producto.cost }}" class='validate' type='int' name='cost' id='cost' />
+                <label style="text-align: center" for='precio'></label>
+                  </div>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='input-field col s12 m12'>
+                  &ensp;Categoria del producto:
+                  <div class="input-field inline">
+                <input value="{{ producto.category }}" class='validate' type='text' name='category' id='category' />
                 <label style="text-align: center" for='precio'></label>
                   </div>
               </div>
@@ -55,22 +57,19 @@
               <div class='input-field col s12 m12'>
                   &ensp;Stock del producto:
                   <div class="input-field inline">
-                  <label for="{{ form.stock.id_for_label }}"></label> {{ form.stock }}
+                <input value="{{ producto.stock }}" class='validate' type='int' name='stock' id='stock' />
                 <label style="text-align: center" for='stock'></label>
                   </div>
               </div>
             </div>
-
-              <div class="row">
-                <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s12 m12">
-                      <i class="material-icons prefix">&emsp;mode_edit</i>
-                      <label for="{{ form.description.id_for_label }}"></label> {{ form.description }}
-                      <label  for="icon_prefix2">&emsp;Descripción</label>
-                    </div>
+            <div class='row'>
+              <div class='input-field col s12 m12'>
+                  &ensp;Descripción:
+                  <div class="input-field inline">
+                <input value="{{ producto.description }}" class='validate' size="100" type='text' name='description' id='description' />
+                <label style="text-align: center" for='stock'></label>
                   </div>
-                </form>
+              </div>
             </div>
 
             <div id="file-upload" class="section">
@@ -80,10 +79,10 @@
               </div>
                   </div>
                 Imagen del producto:
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                  <label for="{{ form.photo.id_for_label }}"></label> {{ form.photo }}
-              </form>
+                <input type="file" name="photo" id="photo" accept="image/*">
+
+                <img src="{{ producto.photo.url }}" alt="Foto" style="width:304px;height:228px;">
+
               </div>
 
           </form>
