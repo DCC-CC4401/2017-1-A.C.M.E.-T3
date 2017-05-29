@@ -85,7 +85,7 @@
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
                 {% if not user.clientprofile %} <!--cambiar esto a la página de perfil del usuario-->
-                    <li><a href="{% url 'acme:index' %}"><i
+                    <li><a href="{% url 'acme:perfil' %}"><i
                             class="material-icons">perm_identity</i>Perfil</a></li>
                 {% endif %}
                 <li><a href="/logout/"><i class="material-icons">exit_to_app</i>Cerrar

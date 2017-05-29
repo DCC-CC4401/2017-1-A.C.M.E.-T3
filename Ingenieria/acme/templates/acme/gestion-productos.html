@@ -28,6 +28,16 @@
               </div>
             </div>
 
+          <div class='row'>
+              <div class='input-field col s12 m12'>
+                  Categoria del producto:
+                 <div class="input-field inline ">
+                 <label for="{{ form.category.id_for_label }}"></label> {{ form.category }}
+                <label style="text-align: center" for='item'></label>
+                 </div>
+              </div>
+            </div>
+
             <div class='row'>
               <div class='input-field col s12 m12'>
                   &ensp;Precio del producto:
@@ -152,6 +162,10 @@
               </div>
 
             </div>
+            <div class='row'>
+                    <a type="submit" class='col l5 offset-l4 btn btn-large waves-effect button teal' href="{,% url 'vendedorprofilepage' %}">&emsp; &emsp;Agregar<i class="material-icons right">send</i></a>
+            </div>
+          </div>
 
 {#            <div class='row'>#}
 {#                    <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="{% url 'vendedorprofilepage' %}">&emsp; &emsp;Agregar<i class="material-icons right">send</i></a>#}

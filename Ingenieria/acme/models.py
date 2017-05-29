@@ -8,8 +8,9 @@ class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
     stock = models.IntegerField()
+    category = models.CharField(max_length=200)
     avatar = models.ImageField(upload_to='photos')
-    #vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -30,6 +30,7 @@ class Migration(migrations.Migration):
                 ('cost', models.PositiveIntegerField()),
                 ('name', models.CharField(max_length=30)),
                 ('description', models.TextField(max_length=300)),
+                ('category', models.TextField(max_length=300)),
                 ('stock', models.PositiveIntegerField()),
                 ('avatar', models.ImageField(blank=True, upload_to='photos')),
                 ('vendedor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
