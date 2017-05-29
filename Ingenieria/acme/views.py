@@ -70,10 +70,8 @@ def gestion(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            f = form.save()
-            f.avatar = form.cleaned_data['avatar']
-            f.vendedor = request.user
-            f.save()
+            form.vendedor = request.user
+            form.save()
             return HttpResponse('image upload success')
     else:
         form = ProductForm()

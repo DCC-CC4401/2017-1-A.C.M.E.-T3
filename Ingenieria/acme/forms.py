@@ -110,7 +110,7 @@ class ProductForm(forms.ModelForm):
     stock = forms.IntegerField(required=True)
     description = forms.CharField(max_length=300, required=False)
     category = forms.CharField(max_length=200, required=True)
-    avatar = forms.ImageField(required=False)
+    avatar = forms.ImageField(required=True)
 
     class Meta:
         model = Product
