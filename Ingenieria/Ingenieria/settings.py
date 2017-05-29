@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -125,3 +125,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'Ingenieria/media')
 MEDIA_URL = '/media/'
+LOGIN_EXEMPT_URLS = [r'^/([a-zA-Z]+)/Perfil/$']

@@ -22,7 +22,7 @@
     <nav class="top-nav">
         <div class="nav-wrapper teal lighten-1">
             <a href="#" class="brand-logo right"><img style="max-height: 65px!important;  padding: 8px 0!important;"
-                                                      class="circle" src="../static/img/logo.png"></a>
+                                                      class="circle" src="{% static "../static/img/logo.png" %}"></a>
             <div class="navbar-fixed">
                 <a href="#" data-activates="slide-out"
                    class="left button-collapse btn-floating btn-large waves-effect waves-light"><i
@@ -36,15 +36,15 @@
                         <!--<i class="material-icons right grey-text text-lighten-2"
                            style="position: absolute; bottom: -0.5em; right: 0.5em; padding: 0 0 !important;">settings</i>-->
                         <div class="background" style="height:175px;">
-                            <img src="../static/img/background4.png">
+                            <img src="{% static "../static/img/background4.png" %}">
                         </div>
                         <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                              src="../static/img/AvatarPenguin.png"></a>
+                                              src="{% static "../static/img/AvatarPenguin.png" %}"></a>
                         <a href="#!name"><span style="margin-left: 5%;" class="white-text name">Invitado</span></a>
                     </div>
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
-               <li><a href="{% url 'login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
+                <li><a href="{% url 'login' %}"><i class="material-icons">account_circle</i>Iniciar Sesión</a></li>
             {% else %}
                 <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y">
                 <li>
@@ -52,7 +52,7 @@
                         <!--<i class="material-icons right grey-text text-lighten-2"
                            style="position: absolute; bottom: -0.5em; right: 0.5em; padding: 0 0 !important;">settings</i>-->
                         <div class="background" style="height:175px;">
-                            <img src="../static/img/background4.png">
+                            <img src="{% static "../static/img/background4.png" %}">
                         </div>
                         {% if user.vendedorambprofile %}
                             {% if user.vendedorambprofile.avatar %}
@@ -60,7 +60,7 @@
                                                       src="{{ user.vendedorambprofile.avatar.url }}"></a>
                             {% else %}
                                 <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                      src="../static/img/AvatarVendedor1.png"></a>
+                                                      src="{% static "../static/img/AvatarVendedor1.png" %}"></a>
                             {% endif %}
                         {% elif user.vendedorfijoprofile %}
                             {% if user.vendedorfijoprofile.avatar %}
@@ -68,7 +68,7 @@
                                                       src="{{ user.vendedorfijoprofile.avatar.url }}"></a>
                             {% else %}
                                 <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                      src="../static/img/AvatarVendedor1.png"></a>
+                                                      src="{% static "../static/img/AvatarVendedor1.png" %}"></a>
                             {% endif %}
                         {% else %}
                             {% if user.clientprofile.avatar %}
@@ -76,7 +76,7 @@
                                                       src="{{ user.clientprofile.avatar.url }}"></a>
                             {% else %}
                                 <a href="#!user"><img style="margin-top: 16%;" class="circle"
-                                                      src="../static/img/AvatarEstudiante.png"></a>
+                                                      src="{% static "../static/img/AvatarEstudiante.png" %}"></a>
                             {% endif %}
                         {% endif %}
                         <a href="#!name"><span style="margin-left: 5%;"
@@ -85,7 +85,7 @@
                 </li>
                 <li><a href="{% url 'acme:index' %}"><i class="material-icons">home</i>Inicio</a></li>
                 {% if not user.clientprofile %} <!--cambiar esto a la página de perfil del usuario-->
-                    <li><a href="{% url 'acme:perfil' %}"><i
+                    <li><a href="{% url 'acme:index' %}"><i
                             class="material-icons">perm_identity</i>Perfil</a></li>
                 {% endif %}
                 <li><a href="/logout/"><i class="material-icons">exit_to_app</i>Cerrar
