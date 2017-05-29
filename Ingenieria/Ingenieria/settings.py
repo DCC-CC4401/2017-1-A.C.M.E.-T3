@@ -121,7 +121,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
 MEDIA_ROOT = os.path.join(BASE_DIR,'Ingenieria/media')
 MEDIA_URL = '/media/'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'acmeIng2017@gmail.com'
+EMAIL_HOST_PASSWORD = 'acmegrupo'
+DEFAULT_FROM_EMAIL = 'acmeIng2017@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
