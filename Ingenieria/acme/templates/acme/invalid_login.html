@@ -39,7 +39,7 @@
     <div class="section"></div>
     <h5 class="teal-text" style="text-align: center;">No se ha podido iniciar sesión </h5></div>
         <div style="text-align: center;"><a class="grey-text"> Para volver a ingresar </a><a
-                href="/login/">haz click aquí</a></div>
+                href="{% url 'login' %}">haz click aquí</a></div>
         <div style="text-align: center;"><a class="grey-text"> Para registrarte </a><a
                 href={% url 'acme:signup' %}>haz click aquí</a></div>
         <div style="text-align: center;"><a class="grey-text"> Para volver a la página inicial </a><a

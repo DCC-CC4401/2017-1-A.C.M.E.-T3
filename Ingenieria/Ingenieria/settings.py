@@ -123,3 +123,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'Ingenieria/media')
 MEDIA_URL = '/media/'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
