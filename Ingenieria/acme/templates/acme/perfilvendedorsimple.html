@@ -8,22 +8,23 @@
 
 </script>
     <main>
-    {% if user.vendedorambprofile %}
+    {% if user.clientprofile %}
+     {% if esAmbulante == "true" %}
         <div class="container">
             <div id="profile-page-header" class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="../static/img/food-background3.png"  alt="user background">
                 </div>
-                {% if user.vendedorfijoprofile.avatar %}
+                {% if vendedor.avatar %}
                 <div class="row hide-on-small-and-down">
                     <a class="card-profile-image-large">
-                        <img style="margin-top: 20%;" src="{{ user.vendedorambprofile.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                        <img style="margin-top: 20%;" src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
                     </a>
                 </div>
 
                 <div class="row show-on-small hide-on-med-and-up">
                     <a class="card-profile-image-small">
-                        <img src="{{ user.vendedorambprofile.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                        <img src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
                     </a>
                 </div>
                     {% else %}
@@ -38,19 +39,20 @@
                         <img src="../static/img/AvatarVendedor1.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
                     </a>
                 </div>
-                    {% endif %}
+
+                {% endif %}
 
                 <div class="card-content s12">
                     <div class="row">
                         <div class="col s3 offset-s2 hide-on-med-and-down">
-                            <h4 class="card-title grey-text flow-text text-darken-4">{{user.vendedorambprofile.user.first_name }} {{user.vendedorambprofile.user.last_name}}</h4>
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
                             <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;Vendedor Ambulante</p>
 
                         </div>
                         <div class="col s3 l2 hide-on-med-and-down center-align">
                              <h4 class="card-title flow-text text-darken-4">Estado</h4>
                             <p class="medium-small flow-text light-green-text">
-                                {% if user.vendedorambprofile.check%}
+                                {% if vendedor.check%}
                                         Disponible
                                 {%else%}
                                     No disponible
@@ -59,16 +61,16 @@
                         </div>
                         <div class="col s3 l2 hide-on-med-and-down center-align">
                             <h8 class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</h8>
-                            {% if user.vendedorambprofile.cash %}
+                            {% if vendedor.cash %}
                             <p class="medium-small flow-text grey-text">Efectivo</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.credit %}
+                            {% if vendedor.credit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.debit %}
+                            {% if vendedor.debit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.student %}
+                            {% if vendedor.student %}
                             <p class="medium-small flow-text grey-text">Junaeb</p>
                                 {% endif %}
                         </div>
@@ -76,41 +78,57 @@
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+
                                     <h6><i class="material-icons amber-text">grade</i>
-                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{user.vendedorambprofile.likes}}</span>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
                                     </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col s3 l2 hide-on-med-and-down right-align">
-                        <a class="btn-floating activator waves-effect waves-light darken-2">
-                              <i class="material-icons">edit</i>
-                          </a>
-                     </div>
                 </div>
 
                 <div class="row show-on-medium-and-down hide-on-med-and-up">
                     <div class="col s4 offset-s2">
-                            <h4 class="card-title grey-text flow-text text-darken-4">{{user.vendedorambprofile.user.first_name }} {{user.vendedorambprofile.user.last_name}}</h4>
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
                             <p class="medium-small flow-text grey-text">&ensp;Vendedor Ambulante</p>
 
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+
                                     <h6><i class="material-icons amber-text">grade</i>
-                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{user.vendedorambprofile.likes}}</span>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
                                     </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
                                 </label>
                             </div>
                         </div>
+                      
                     <div class="col s3 m2 l12 offset-s1">
                         <p class="flow-text text-darken-4">Estado</p>
                         <p class="medium-small flow-text light-green-text">
-                            {% if user.vendedorambprofile.check%}
+                            {% if vendedor.check%}
                                         Disponible
                                 {%else%}
                                     No disponible
@@ -119,40 +137,25 @@
 
                     <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->
                         <p class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</p>
-                        {% if user.vendedorambprofile.cash %}
+                        {% if vendedor.cash %}
                             <p class="medium-small flow-text grey-text">Efectivo</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.credit %}
+                            {% if vendedor.credit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.debit %}
+                            {% if vendedor.debit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
                                 {% endif %}
-                            {% if user.vendedorambprofile.student %}
+                            {% if vendedor.student %}
                             <p class="medium-small flow-text grey-text">Junaeb</p>
                                 {% endif %}
                     </div>
-
-                    <!--<div class="col s3 offset-s2 offset-l10">
-                        <div class="switch" style="margin-left: 10px;">
-                            <label>
-                                <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                <input type="checkbox"><span class="lever"></span>
-                            </label>
-                        </div>
-                    </div>-->
-
-                    <div class="col s4 offset-s8 right-align"> <!--offset-s4-->
-                        <a class="btn-floating activator waves-effect waves-light darken-2">
-                              <i class="material-icons">edit</i>
-                          </a>
-
-                     </div> -->
+                   </div>
                 </div>
-            </div>
-        </div>
+              </div>
+         </div>
 
-        {% elif user.vendedorfijoprofile %}
+     {% else %}
 
         <div class="container">
             <div id="profile-page-header" class="card">
@@ -160,16 +163,16 @@
                     <img class="activator" src="../static/img/food-background3.png" alt="user background">
 
                 </div>
-                {% if user.vendedorfijoprofile.avatar %}
+                {% if vendedor.avatar %}
                 <div class="row hide-on-small-and-down">
                     <a class="card-profile-image-large">
-                        <img style="margin-top: 20%;" src="{{ user.vendedorfijoprofile.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                        <img style="margin-top: 20%;" src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
                     </a>
                 </div>
 
                 <div class="row show-on-small hide-on-med-and-up">
                     <a class="card-profile-image-small">
-                        <img src="{{ user.vendedorfijoprofile.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                        <img src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
                     </a>
                 </div>
                     {% else %}
@@ -188,9 +191,9 @@
                 <div class="card-content s12">
                     <div class="row">
                         <div class="col s3 offset-s2 hide-on-med-and-down">
-                            <h4 class="card-title grey-text flow-text text-darken-4">{{user.vendedorfijoprofile.user.first_name }} {{user.vendedorfijoprofile.user.last_name}}  </h4>
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}  </h4>
                             <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;Vendedor Fijo</p>
-                            <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;{{ user.vendedorfijoprofile.init_time}}-{{user.vendedorfijoprofile.end_time }}</p>
+                            <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;{{ vendedor.init_time}}-{{vendedor.end_time }}</p>
 
                         </div>
                         <div class="col s3 l2 hide-on-med-and-down center-align">
@@ -200,53 +203,68 @@
                         </div>
                         <div class="col s3 l2 hide-on-med-and-down center-align">
                             <h8 class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</h8>
-                            {% if user.vendedorfijoprofile.cash %}
+                            {% if vendedor.cash %}
                             <p class="medium-small flow-text grey-text">Efectivo</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.credit %}
+                            {% if vendedor.credit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.debit %}
+                            {% if vendedor.debit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.student %}
+                            {% if vendedor.student %}
                             <p class="medium-small flow-text grey-text">Junaeb</p>
                                 {% endif %}
                         </div>
+
                         <div class="col s3 l2 hide-on-med-and-down center-align">
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+
                                     <h6><i class="material-icons amber-text">grade</i>
-                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{user.vendedorfijoprofile.likes}}</span>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
                                     </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
                                 </label>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col s3 l2 hide-on-med-and-down right-align">
-                        <a class="btn-floating activator waves-effect waves-light darken-2">
-                              <i class="material-icons">mode_edit</i>
-                          </a>
-                     </div>
                 </div>
 
                 <div class="row show-on-medium-and-down hide-on-med-and-up">
                     <div class="col s4 offset-s2">
-                            <h4 class="card-title grey-text flow-text text-darken-4">{{user.vendedorfijoprofile.user.first_name }} {{user.vendedorfijoprofile.user.last_name}}</h4>
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
                             <p class="medium-small flow-text grey-text">&ensp;Vendedor Fijo</p>
                             <p class="flow-text text-darken-4" style="font-size: 0.88rem;">
-                                &ensp;Horario: <a class="light-green-text">{{ user.vendedorfijoprofile.init_time}}-{{user.vendedorfijoprofile.end_time }}</a>
+                                &ensp;Horario: <a class="light-green-text">{{ vendedor.init_time}}-{{vendedor.end_time }}</a>
                             </p>
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+
                                     <h6><i class="material-icons amber-text">grade</i>
-                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{user.vendedorfijoprofile.likes}}</span>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
                                     </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
                                 </label>
                             </div>
                         </div>
@@ -258,28 +276,301 @@
 
                     <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->
                         <p class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</p>
-                        {% if user.vendedorfijoprofile.cash %}
+                        {% if vendedor.cash %}
                             <p class="medium-small flow-text grey-text">Efectivo</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.credit %}
+                            {% if vendedor.credit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.debit %}
+                            {% if vendedor.debit %}
                             <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
                                 {% endif %}
-                            {% if user.vendedorfijoprofile.student %}
+                            {% if vendedor.student %}
                             <p class="medium-small flow-text grey-text">Junaeb</p>
                                 {% endif %}
                     </div>
 
-                   <!-- <div class="col s3 offset-s2 offset-l10">
-                        <div class="switch" style="margin-left: 10px;">
-                            <label>
-                                <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favorito</p>
-                                <input type="checkbox"><span class="lever"></span>
-                            </label>
+
+                </div>
+            </div>
+        </div>
+
+     {% endif %}
+
+    {% else %}
+
+      {% if esAmbulante %}
+        <div class="container">
+            <div id="profile-page-header" class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="../static/img/food-background3.png"  alt="user background">
+                </div>
+                {% if vendedor.avatar %}
+                <div class="row hide-on-small-and-down">
+                    <a class="card-profile-image-large">
+                        <img style="margin-top: 20%;" src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+
+                <div class="row show-on-small hide-on-med-and-up">
+                    <a class="card-profile-image-small">
+                        <img src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+                    {% else %}
+                    <div class="row hide-on-small-and-down">
+                    <a class="card-profile-image-large">
+                        <img style="margin-top: 20%;" src="../static/img/AvatarVendedor1.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+
+                <div class="row show-on-small hide-on-med-and-up">
+                    <a class="card-profile-image-small">
+                        <img src="../static/img/AvatarVendedor1.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+                    {% endif %}
+
+                <div class="card-content s12">
+                    <div class="row">
+                        <div class="col s3 offset-s2 hide-on-med-and-down">
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
+                            <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;Vendedor Ambulante</p>
+
                         </div>
-                    </div> -->
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+                             <h4 class="card-title flow-text text-darken-4">Estado</h4>
+                            <p class="medium-small flow-text light-green-text">
+                                {% if vendedor.check%}
+                                        Disponible
+                                {%else%}
+                                    No disponible
+                                {% endif %}
+                                    </p>
+                        </div>
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+                            <h8 class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</h8>
+                            {% if vendedor.cash %}
+                            <p class="medium-small flow-text grey-text">Efectivo</p>
+                                {% endif %}
+                            {% if vendedor.credit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
+                                {% endif %}
+                            {% if vendedor.debit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
+                                {% endif %}
+                            {% if vendedor.student %}
+                            <p class="medium-small flow-text grey-text">Junaeb</p>
+                                {% endif %}
+                        </div>
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+
+                                <label>
+                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favoritos</p>
+
+                                    <h6><i class="material-icons amber-text">grade</i>
+
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
+
+                                    </h6>
+
+
+
+                                </label>
+
+
+                        </div>
+                    </div>
+
+
+
+                <div class="row show-on-medium-and-down hide-on-med-and-up">
+                    <div class="col s4 offset-s2">
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
+                            <p class="medium-small flow-text grey-text">&ensp;Vendedor Ambulante</p>
+
+
+                                <label>
+                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favoritos</p>
+
+                                    <h6><i class="material-icons amber-text">grade</i>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
+                                    </h6>
+                                </label>
+
+                        </div>
+                    <div class="col s3 m2 l12 offset-s1">
+                        <p class="flow-text text-darken-4">Estado</p>
+                        <p class="medium-small flow-text light-green-text">
+                            {% if vendedor.check%}
+                                        Disponible
+                                {%else%}
+                                    No disponible
+                                {% endif %}</p>
+                    </div>
+
+                    <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->
+                        <p class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</p>
+                        {% if vendedor.cash %}
+                            <p class="medium-small flow-text grey-text">Efectivo</p>
+                                {% endif %}
+                            {% if vendedor.credit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
+                                {% endif %}
+                            {% if vendedor.debit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
+                                {% endif %}
+                            {% if vendedor.student %}
+                            <p class="medium-small flow-text grey-text">Junaeb</p>
+                                {% endif %}
+                    </div>
+
+
+
+
+
+                     </div>
+                </div>
+            </div>
+        </div>
+
+      {% else %}
+
+        <div class="container">
+            <div id="profile-page-header" class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="../static/img/food-background3.png" alt="user background">
+
+                </div>
+                {% if vendedor.avatar %}
+                <div class="row hide-on-small-and-down">
+                    <a class="card-profile-image-large">
+                        <img style="margin-top: 20%;" src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+
+                <div class="row show-on-small hide-on-med-and-up">
+                    <a class="card-profile-image-small">
+                        <img src="{{ vendedor.avatar.url }}" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+                    {% else %}
+                    <div class="row hide-on-small-and-down">
+                    <a class="card-profile-image-large">
+                        <img style="margin-top: 20%;" src="../static/img/AvatarVendedor1.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+
+                <div class="row show-on-small hide-on-med-and-up">
+                    <a class="card-profile-image-small">
+                        <img src="../static/img/AvatarVendedor1.png" alt="profile image" class="circle z-depth-2 responsive-img activator">
+                    </a>
+                </div>
+                    {% endif %}
+                <div class="card-content s12">
+                    <div class="row">
+                        <div class="col s3 offset-s2 hide-on-med-and-down">
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}  </h4>
+                            <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;Vendedor Fijo</p>
+                            <p class="medium-small flow-text grey-text">&emsp;&emsp;&ensp;{{ vendedor.init_time}}-{{vendedor.end_time }}</p>
+
+                        </div>
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+                             <h4 class="card-title flow-text text-darken-4">Estado</h4>
+                            <p class="medium-small flow-text light-green-text">
+                               {{ disponibilidad}}
+                        </div>
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+                            <h8 class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</h8>
+                            {% if vendedor.cash %}
+                            <p class="medium-small flow-text grey-text">Efectivo</p>
+                                {% endif %}
+                            {% if vendedor.credit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
+                                {% endif %}
+                            {% if vendedor.debit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
+                                {% endif %}
+                            {% if vendedor.student %}
+                            <p class="medium-small flow-text grey-text">Junaeb</p>
+                                {% endif %}
+                        </div>
+                        <div class="col s3 l2 hide-on-med-and-down center-align">
+
+                                <div class="switch" style="margin-left: 10px;">
+                                <label>
+                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favoritos</p>
+
+                                    <h6><i class="material-icons amber-text">grade</i>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
+                                    </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row show-on-medium-and-down hide-on-med-and-up">
+                    <div class="col s4 offset-s2">
+                            <h4 class="card-title grey-text flow-text text-darken-4">{{vendedor.user.first_name }} {{vendedor.user.last_name}}</h4>
+                            <p class="medium-small flow-text grey-text">&ensp;Vendedor Fijo</p>
+                            <p class="flow-text text-darken-4" style="font-size: 0.88rem;">
+                                &ensp;Horario: <a class="light-green-text">{{ vendedor.init_time}}-{{vendedor.end_time }}</a>
+                            </p>
+
+                                <label>
+                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Favoritos</p>
+
+                                    <h6><i class="material-icons amber-text">grade</i>
+                                        <span class=" grey-text flow-text text-darken-4"style="font-size:22px; line-height:25px;">{{vendedor.likes}}</span>
+                                    </h6>
+                                    <p class="medium-small flow-text light-green-text">
+                                        {% if esfavorito %}
+                                        Eliminar de Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="eliminarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% else %}
+                                        Agregar a Favoritos
+                                        <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="agregarfav/{{ vendedor.user.id}}">&emsp;
+                                        &emsp;Agregar<i class="material-icons right">send</i></a>
+                                        {% endif %} </p>
+                                </label>
+
+                        </div>
+
+                    <div class="col s3 m2 l12 offset-s1">
+                        <p class="flow-text text-darken-4">Estado</p>
+                        <p class="medium-small flow-text light-green-text">Disponible</p> <!-- ARREGLARRR -->
+                    </div>
+
+                    <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->
+                        <p class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</p>
+                        {% if vendedor.cash %}
+                            <p class="medium-small flow-text grey-text">Efectivo</p>
+                                {% endif %}
+                            {% if vendedor.credit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Crédito</p>
+                                {% endif %}
+                            {% if vendedor.debit %}
+                            <p class="medium-small flow-text grey-text">Tarjeta de Débito</p>
+                                {% endif %}
+                            {% if vendedor.student %}
+                            <p class="medium-small flow-text grey-text">Junaeb</p>
+                                {% endif %}
+                    </div>
 
 
                 </div>
@@ -287,6 +578,7 @@
         </div>
 
         {% endif %}
+    {% endif %}
 
 
     <div id="profile-page-content" class="row">
@@ -346,11 +638,10 @@
 
 
                 </div>
-               <!-- <div class='row'>
-                    <a class='col l5 offset-l4 btn btn-large waves-effect button teal' href="{;% url 'gestionproductos' %}">Agregar Item</a>
-                </div> -->
+
             </div>
         </div>
     </div>
     </main>
+
 {% endblock %}
