@@ -322,7 +322,7 @@
                                               <span class="card-title grey-text text-darken-4">{{ producto.name}}<i class="material-icons right">close</i></span>
                                               <ul>
                                                 <li>Precio: <a class="green-text light-green-text">${{ producto.cost}}</a></li>
-                                                <li>Categoria: Almuerzos</li>
+                                                <li>Categoria: {{producto.category}}</li>
                                                 <li>Stock: {{ producto.stock }}</li>
                                                 <li>Descripción: {{ producto.description }}.
                                                     <p class="right-align"><a class="waves-effect waves-light" href="{{ producto.avatar.url }}">Ver imagen</a></p>

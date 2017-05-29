@@ -83,11 +83,9 @@ def gestion(request):
     return render(request, 'acme/gestion-productos.html', args)
 
 def perfil(request):
-
     user=request.user
     productos= Product.objects.filter(vendedor=user)
-    print (productos)
-
+    #print (productos)
     usuarioFijo = VendedorFijoProfile.objects.filter(user=user)
     if (usuarioFijo.__len__() !=0):
         ahora = datetime.now()
@@ -100,7 +98,6 @@ def perfil(request):
             return render(request, 'acme/vendedor-profile-page.html', {'productos': productos , 'disponibilidad':"Disponible"})
         else:
             return render(request, 'acme/vendedor-profile-page.html', {'productos': productos, 'disponibilidad': "No Disponible"})
-
     return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
 
 
