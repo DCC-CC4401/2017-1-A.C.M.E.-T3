@@ -18,6 +18,9 @@ urlpatterns = [
   # url(r'^agregarfav/(?P<id>[0-9]+)/$', views.agregarfavorito, name='deletefav'),
   url(r'^gestion/', views.gestion, name='gestion'),
   url(r'^modificar/', views.modificar, name='modificar'),
+  url(r'^(?P<usuario>[a-zA-Z0-9_\-.:]+)/Perfil/$', views.viewClientFijo, name='ViewClient'),
+  url(r'^(?P<usuario>[a-zA-Z0-9_\-.:]+)/perfil/$', views.viewClientAmb, name='ViewClient2'),
+  #url(r'^Perfil/$', views.perfil, name='perfil'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

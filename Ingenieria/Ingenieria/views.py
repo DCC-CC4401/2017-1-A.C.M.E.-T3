@@ -1,7 +1,8 @@
 from django.contrib import auth
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.template.context_processors import csrf
 
+from acme.models import *
 
 def login(request):
     c = {}
@@ -32,3 +33,4 @@ def invalid_login(request):
 def logout(request):
     auth.logout(request)
     return render_to_response('acme/logout.html')
+
