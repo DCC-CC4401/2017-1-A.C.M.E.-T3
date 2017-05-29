@@ -9,7 +9,7 @@ class Product(models.Model):
     description = models.CharField(max_length=300)
     stock = models.IntegerField()
     category = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to='photos')
+    photo = models.ImageField(upload_to='photos', blank=True)
     vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
