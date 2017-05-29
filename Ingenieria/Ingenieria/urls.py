@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.views import password_reset_done, password_reset, password_reset_confirm, password_reset_complete
 
 from Ingenieria import views
 
@@ -27,4 +27,8 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^log/$', views.log, name='log'),
     url(r'^invalid_login/$', views.invalid_login, name='invalid_login'),
+    url(r'^reset-password/$', password_reset, {'template_name': 'acme/password_reset_form.html', 'email_template_name': 'acme/password_reset_email.html'},name='reset_password'),
+    url(r'^reset-password/done/$', password_reset_done, {'template_name': 'acme/password_reset_done.html'}, name='password_reset_done'),
+    url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'acme/password_reset_confirm.html'} ,name='password_reset_confirm'),
+    url(r'^reset-password/complete/$', password_reset_complete, {'template_name': 'acme/password_reset_complete.html'},name='password_reset_complete')
 ]
