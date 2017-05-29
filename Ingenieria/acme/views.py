@@ -9,7 +9,7 @@ from django.template.context_processors import csrf
 from datetime import datetime, date, time, timedelta
 import calendar
 
-from acme.forms import UserForm, VendFijoForm, VendAmbForm
+from acme.forms import *
 from acme.models import *
 
 
@@ -151,20 +151,11 @@ def gestion(request):
     return render(request, 'acme/gestion-productos.html', args)
 
 
-<<<<<<< HEAD
-    user=request.user
-    productos= Product.objects.filter(vendedor=user)
-    print (productos)
-=======
+
 def viewClientFijo(request,usuario):
     users = VendedorFijoProfile.objects.get(user=User.objects.get(username=usuario))
     productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
     return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos})
->>>>>>> origin/map
-
-
-<<<<<<< HEAD
-    return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
 
 
 def perfilVendedor(request , vendedor):
@@ -276,9 +267,8 @@ def delete(request, id):
 def modificar(request):
     a=request.body
     return render(request, 'acme/modificar-producto.html', {})
-=======
+
 def viewClientAmb(request, usuario):
     users = get_object_or_404(VendedorAmbProfile, user= User.objects.get(username = usuario))
     productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
     return render(request, 'acme/perfilvendedorsimple.html',  {'users': users, 'productos': productos})
->>>>>>> origin/map
