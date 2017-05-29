@@ -17,6 +17,7 @@ urlpatterns = [
   # url(r'^eliminarfav/(?P<id>[0-9]+)/$', views.eliminarfavorito, name='addfav'),
   # url(r'^agregarfav/(?P<id>[0-9]+)/$', views.agregarfavorito, name='deletefav'),
   url(r'^gestion/', views.gestion, name='gestion'),
+  url(r'^modificar/', views.modificar, name='modificar'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

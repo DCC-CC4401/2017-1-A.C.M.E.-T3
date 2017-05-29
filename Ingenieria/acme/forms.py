@@ -110,12 +110,12 @@ class ProductForm(forms.ModelForm):
     stock = forms.IntegerField(required=True)
     description = forms.CharField(max_length=300, required=False)
     category = forms.CharField(max_length=200, required=True)
-    avatar = forms.ImageField(required=True)
+    photo = forms.ImageField(required=True)
 
     class Meta:
         model = Product
         exclude = ('user',)
-        fields = ('cost', 'name', 'description', 'stock', 'category', 'avatar', 'user')
+        fields = ('cost', 'name', 'description', 'stock', 'category', 'photo', 'user')
 
     def save(self, commit=True):
         prod = Product(cost=self.cleaned_data['cost'],
@@ -123,6 +123,6 @@ class ProductForm(forms.ModelForm):
                        stock=self.cleaned_data['stock'],
                        description=self.cleaned_data['description'],
                        category=self.cleaned_data['category'],
-                       avatar=self.cleaned_data['avatar'])
+                       photo=self.cleaned_data['photo'])
         prod.save()
         return prod

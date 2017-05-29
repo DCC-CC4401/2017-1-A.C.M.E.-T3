@@ -9,7 +9,7 @@ class Product(models.Model):
     description = models.CharField(max_length=300)
     stock = models.IntegerField()
     category = models.CharField(max_length=200)
-    avatar = models.ImageField(upload_to='photos')
+    photo = models.ImageField(upload_to='photos')
     vendedor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -28,7 +28,6 @@ class VendedorFijoProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
 
 class VendedorAmbProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
