@@ -7,7 +7,7 @@ from django.template.context_processors import csrf
 from datetime import datetime, date, time, timedelta
 import calendar
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
-from acme.models import Product
+from acme.models import Product, VendedorFijoProfile
 
 
 def vendedor(request):
@@ -65,7 +65,22 @@ def signupVendFijo(request):
     return render(request, 'acme/signupVendFijo.html', args)
 
 def perfil(request):
-    username = request.user
-    productos= Product.objects.filter(vendedor=username)
+
+    user= request.user
+    productos= Product.objects.filter(vendedor=user)
     print (productos)
+
+    usuarioFijo = VendedorFijoProfile.objects.filter(user=user)
+    if (usuarioFijo.__len__() !=0):
+        ahora = datetime.now()
+        tiempoInicial = usuarioFijo[0].init_time.__str__().split(":")
+        tiempoFinal= usuarioFijo[0].end_time.__str__().split(":")
+        horaInicial=time(int(tiempoInicial[0]),int(tiempoInicial[1]),int(tiempoInicial[2]))
+        horaFinal = time(int(tiempoFinal[0]),int(tiempoFinal[1]),int(tiempoFinal[2]))
+        horaActual= time(ahora.hour,ahora.minute,ahora.second)
+        if horaInicial <= horaActual and horaActual <= horaFinal :
+            return render(request, 'acme/vendedor-profile-page.html', {'productos': productos , 'disponibilidad':"Disponible"})
+        else:
+            return render(request, 'acme/vendedor-profile-page.html', {'productos': productos, 'disponibilidad': "No Disponible"})
+
     return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
