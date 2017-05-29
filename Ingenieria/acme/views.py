@@ -158,83 +158,6 @@ def viewClientFijo(request, usuario):
                   {'users': users, 'productos': productos, 'disponibilidad': disponibilidad})
 
 
-#
-# def perfilVendedor(request, vendedor):
-#     if request.user.is_authenticated():
-#         cliente = request.user
-#         usuarioVendedor = User.objects.filter(username=vendedor)
-#         vendedor = VendedorFijoProfile.objects.filter(user=usuarioVendedor[0])
-#         if vendedor.__len__() != 0:
-#             ahora = datetime.now()
-#             tiempoInicial = vendedor[0].init_time.__str__().split(":")
-#             tiempoFinal = vendedor[0].end_time.__str__().split(":")
-#             horaInicial = time(int(tiempoInicial[0]), int(tiempoInicial[1]), int(tiempoInicial[2]))
-#             horaFinal = time(int(tiempoFinal[0]), int(tiempoFinal[1]), int(tiempoFinal[2]))
-#             horaActual = time(ahora.hour, ahora.minute, ahora.second)
-#             favoritos = ClientProfile.objects.filter(user=cliente, favVendFijo=vendedor[0])
-#             productos = Product.objects.filter(vendedor=vendedor[0].user)
-#             if favoritos.__len__() != 0:
-#                 if horaInicial <= horaActual and horaActual <= horaFinal:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "Disponible", 'esfavorito': "true",
-#                                    'esAmbulante': None, 'vendedor': vendedor[0]})
-#                 else:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "No Disponible", 'esfavorito': "true",
-#                                    'esAmbulante': None, 'vendedor': vendedor[0]})
-#             else:
-#                 if horaInicial <= horaActual and horaActual <= horaFinal:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "Disponible", 'esfavorito': None,
-#                                    'esAmbulante': None, 'vendedor': vendedor[0]})
-#                 else:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "No Disponible", 'esfavorito': None,
-#                                    'esAmbulante': None, 'vendedor': vendedor[0]})
-#
-#
-#
-#         else:
-#             vendedor = VendedorAmbProfile.objects.filter(user=usuarioVendedor[0])
-#             favoritos = ClientProfile.objects.filter(user=cliente, favVendAmb=vendedor[0])
-#             productos = Product.objects.filter(vendedor=vendedor[0].user)
-#             if favoritos.__len__() != 0:
-#                 return render(request, 'acme/perfilvendedorsimple.html',
-#                               {'productos': productos, 'esfavorito': "true",
-#                                'esAmbulante': "true", 'vendedor': vendedor[0]})
-#
-#             else:
-#                 return render(request, 'acme/perfilvendedorsimple.html',
-#                               {'productos': productos, 'esfavorito': None,
-#                                'esAmbulante': "true", 'vendedor': vendedor[0]})
-#
-#     else:
-#         usuarioVendedor = User.objects.filter(username=vendedor)
-#         vendedor = VendedorFijoProfile.objects.filter(user=usuarioVendedor[0])
-#         if vendedor.__len__() != 0:
-#             ahora = datetime.now()
-#             tiempoInicial = vendedor[0].init_time.__str__().split(":")
-#             tiempoFinal = vendedor[0].end_time.__str__().split(":")
-#             horaInicial = time(int(tiempoInicial[0]), int(tiempoInicial[1]), int(tiempoInicial[2]))
-#             horaFinal = time(int(tiempoFinal[0]), int(tiempoFinal[1]), int(tiempoFinal[2]))
-#             horaActual = time(ahora.hour, ahora.minute, ahora.second)
-#             productos = Product.objects.filter(vendedor=vendedor[0].user)
-#             if horaInicial <= horaActual and horaActual <= horaFinal:
-#                 return render(request, 'acme/perfilvendedorsimple.html',
-#                               {'productos': productos, 'disponibilidad': "Disponible",
-#                                'esAmbulante': None, 'vendedor': vendedor[0]})
-#             else:
-#                 return render(request, 'acme/perfilvendedorsimple.html',
-#                               {'productos': productos, 'disponibilidad': "No Disponible",
-#                                'esAmbulante': None, 'vendedor': vendedor[0]})
-#         else:
-#             vendedor = VendedorAmbProfile.objects.filter(user=usuarioVendedor[0])
-#             productos = Product.objects.filter(vendedor=vendedor[0].user)
-#             return render(request, 'acme/perfilvendedorsimple.html',
-#                           {'productos': productos,
-#                            'esAmbulante': "true", 'vendedor': vendedor[0]})
-
-
 def agregarfavorito(request, id):
     vendedor = VendedorFijoProfile.objects.get(user=User.objects.get(id=id))
     if vendedor != None:
@@ -254,13 +177,6 @@ def agregarfavorito(request, id):
 
 
 def update(request, id):
-    #p = Product.objects.get(pk=id)
-    # you can do this for as many fields as you like
-    # here I asume you had a form with input like <input type="text" name="name"/>
-    # so it's basically like that for all form fields
-    #p.name = request.POST.get('name')
-    #p.save()
-    #return HttpResponse('updated')
     form = ProductForm(request.POST, request.FILES)
     if form.is_valid():
         f = form.save()
@@ -284,22 +200,15 @@ def delete(request, id_producto):
 
 
 def modificar(request,id_producto):
-    #id = request.GET.get('id','')
     p = Product.objects.get(id=id_producto)
-    #p = Product.objects.get(vendedor=)
     if request.method == 'GET':
-        #p.name = request.POST.get('name', p.name)
         form = ProductForm(instance=p)
     else:
-        #form = ProductForm(instance=p)
         form = ProductForm(request.POST, instance=p)
         if form.is_valid():
-            # f = p.save()
             f = form.save()
             f.vendedor = request.user
             f.save()
-            #producto = form.save()
-            #producto.save()
             delete(request, id_producto)
             return redirect('acme:index')
     return render(request, 'acme/modificar-producto.html', {'form': form})
