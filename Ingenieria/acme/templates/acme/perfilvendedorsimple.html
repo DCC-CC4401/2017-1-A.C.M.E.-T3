@@ -9,11 +9,6 @@
         });
 
     </script>
-    <script>
-        function call_counter(users, user) {
-            $.post()
-        }
-    </script>
     <main>
         {% if not users.init_time %}
             <div class="container">
@@ -92,7 +87,7 @@
                                         {% if user.is_authenticated %}
                                             <p class="card-title grey-text flow-text text-darken-4"
                                                style="font-size: 1.3rem;">Favorito</p>
-                                            <button>Favorito</button>
+                                            <input type="checkbox"><span class="lever"></span>
                                         {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
