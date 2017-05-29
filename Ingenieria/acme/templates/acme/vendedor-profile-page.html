@@ -1,4 +1,6 @@
 {% extends 'acme/base.html' %}
+
+{% load staticfiles %}
 {% block content %}
 
     <script>
@@ -12,9 +14,9 @@
             <div class="container">
                 <div id="profile-page-header" class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="../static/img/food-background3.png" alt="user background">
+                        <img class="activator" src="{% static "../static/img/food-background3.png" %}"alt="user background">
                     </div>
-                    {% if user.vendedorfijoprofile.avatar %}
+                    {% if user.vendedorambprofile.avatar %}
                         <div class="row hide-on-small-and-down">
                             <a class="card-profile-image-large">
                                 <img style="margin-top: 20%;" src="{{ user.vendedorambprofile.avatar.url }}"
@@ -31,14 +33,14 @@
                     {% else %}
                         <div class="row hide-on-small-and-down">
                             <a class="card-profile-image-large">
-                                <img style="margin-top: 20%;" src="../static/img/AvatarVendedor1.png"
+                                <img style="margin-top: 20%;" src="{% static "../static/img/AvatarVendedor1.png" %}"
                                      alt="profile image" class="circle z-depth-2 responsive-img activator">
                             </a>
                         </div>
 
                         <div class="row show-on-small hide-on-med-and-up">
                             <a class="card-profile-image-small">
-                                <img src="../static/img/AvatarVendedor1.png" alt="profile image"
+                                <img src="{% static "../static/img/AvatarVendedor1.png" %}" alt="profile image"
                                      class="circle z-depth-2 responsive-img activator">
                             </a>
                         </div>
@@ -168,7 +170,7 @@
             <div class="container">
                 <div id="profile-page-header" class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="../static/img/food-background3.png" alt="user background">
+                        <img class="activator" src="{% static "../static/img/food-background3.png" %}" alt="user background">
 
                     </div>
                     {% if user.vendedorfijoprofile.avatar %}
@@ -188,14 +190,14 @@
                     {% else %}
                         <div class="row hide-on-small-and-down">
                             <a class="card-profile-image-large">
-                                <img style="margin-top: 20%;" src="../static/img/AvatarVendedor1.png"
+                                <img style="margin-top: 20%;" src="{% static "../static/img/AvatarVendedor1.png" %}"
                                      alt="profile image" class="circle z-depth-2 responsive-img activator">
                             </a>
                         </div>
 
                         <div class="row show-on-small hide-on-med-and-up">
                             <a class="card-profile-image-small">
-                                <img src="../static/img/AvatarVendedor1.png" alt="profile image"
+                                <img src="{% static "../static/img/AvatarVendedor1.png" %}" alt="profile image"
                                      class="circle z-depth-2 responsive-img activator">
                             </a>
                         </div>

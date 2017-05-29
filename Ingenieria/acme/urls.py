@@ -13,7 +13,7 @@ urlpatterns = [
                   url(r'^signup-Vendedor-Fijo/$', views.signupVendFijo, name='signupFijo'),
                   url(r'^signup-Vendedor-Ambulante/$', views.signupVendAmb, name='signupAmb'),
                   url(r'^(?P<usuario>[a-zA-Z0-9_\-.:]+)/Perfil/$', views.viewClientFijo, name='ViewClient'),
-                  url(r'^(?P<usuario>[a-zA-Z0-9_\-.:]+)/Perfil/$', views.viewClientAmb, name='ViewClient2'),
+                  url(r'^(?P<usuario>[a-zA-Z0-9_\-.:]+)/perfil/$', views.viewClientAmb, name='ViewClient2'),
                   #url(r'^Perfil/$', views.perfil, name='perfil'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

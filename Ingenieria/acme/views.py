@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import csrf
 from datetime import datetime, date, time, timedelta
 import calendar
@@ -53,7 +53,6 @@ def indexNotRegister(request):
             if ambFav:
                 ambFav = ambFav[0]
                 if userfijo:
-                    print "hola"
                     userfijo = userfijo[0]
                 if useramb:
                     useramb = None
@@ -133,12 +132,13 @@ def signupVendFijo(request):
     return render(request, 'acme/signupVendFijo.html', args)
 
 
-def viewClientFijo(request, usuario):
-    # users = get_object_or_404(VendedorFijoProfile, username = usuario)
-    # print users
-    return render(request, 'acme/profile.html', {})  # {'users':users})
+def viewClientFijo(request,usuario):
+    users = VendedorFijoProfile.objects.get(user=User.objects.get(username=usuario))
+    productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
+    return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos})
 
 
 def viewClientAmb(request, usuario):
-    # query_result_amb = VendedorAmbProfile.objects.all()
-    return render(request, 'acme/profile.html', {})  # {'users':users})
+    users = get_object_or_404(VendedorAmbProfile, user= User.objects.get(username = usuario))
+    productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
+    return render(request, 'acme/perfilvendedorsimple.html',  {'users': users, 'productos': productos})
