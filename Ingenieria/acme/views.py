@@ -103,7 +103,6 @@ def perfil(request):
 
     return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
 
-
 def perfilVendedor(request , vendedor):
     if request.user.is_authenticated():
         cliente = request.user
@@ -197,12 +196,19 @@ def agregarfavorito(request,id):
                   {})
 
 def update(request, id):
-    p = Product.objects.get(pk=id)
-    #you can do this for as many fields as you like
-    #here I asume you had a form with input like <input type="text" name="name"/>
-    #so it's basically like that for all form fields
-    p.name = request.POST.get('name')
-    p.save()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = form.save()
+            f.vendedor = request.user
+            f.save()
+            return redirect('acme:perfil')
+
+    else:
+        form = ProductForm()
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
     return HttpResponse('updated')
 
 def delete(request, id):
@@ -211,5 +217,17 @@ def delete(request, id):
     return HttpResponse('deleted')
 
 def modificar(request):
-    a=request.body
-    return render(request, 'acme/modificar-producto.html', {})
+    id = request.GET.get('id','')
+    p = Product.objects.get(pk=id)
+    if request.method == 'POST':
+        p.name = request.POST.get('name', p.name)
+        f = p.save()
+        f.save()
+        return redirect('acme:perfil')
+
+    else:
+        form = ProductForm()
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    return render(request, 'acme/gestion-productos.html', args)
