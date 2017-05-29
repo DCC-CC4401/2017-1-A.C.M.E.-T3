@@ -1,0 +1,31 @@
+{% extends 'acme/base.html' %}
+
+{% block content %}
+    <main>
+        <div class="section"></div>
+
+        <h4 class="teal-text" style="text-align: center;">Eliminar Producto</h4>
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row"
+                 style="margin-left: 5%; margin-right: 5%; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+                    <div class="section">
+                        <h4>¿Está seguro de eliminar el producto {{ producto.name }}?</h4>
+                    </div>
+
+                    <div class='row'>
+                        <button type='submit'> Sí, eliminar </button>
+                        <a href="{% url 'acme:index' %}">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+
+{% endblock %}

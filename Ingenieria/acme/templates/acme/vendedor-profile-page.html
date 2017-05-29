@@ -14,7 +14,8 @@
             <div class="container">
                 <div id="profile-page-header" class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="{% static "../static/img/food-background3.png" %}"alt="user background">
+                        <img class="activator" src="{% static "../static/img/food-background3.png" %}"
+                             alt="user background">
                     </div>
                     {% if user.vendedorambprofile.avatar %}
                         <div class="row hide-on-small-and-down">
@@ -170,7 +171,8 @@
             <div class="container">
                 <div id="profile-page-header" class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="{% static "../static/img/food-background3.png" %}" alt="user background">
+                        <img class="activator" src="{% static "../static/img/food-background3.png" %}"
+                             alt="user background">
 
                     </div>
                     {% if user.vendedorfijoprofile.avatar %}
@@ -249,7 +251,7 @@
                         </div>
 
                         <div class="col s3 l2 hide-on-med-and-down right-align">
-                            <a class="btn-floating activator waves-effect waves-light darken-2">
+                            <a class="btn-floating activator waves-effect waves-light darken-2" href="{% url 'acme:modificar_perfil' %}">
                                 <i class="material-icons">mode_edit</i>
                             </a>
                         </div>
@@ -278,8 +280,7 @@
 
                         <div class="col s3 m2 l12 offset-s1">
                             <p class="flow-text text-darken-4">Estado</p>
-                            <p class="medium-small flow-text light-green-text">Disponible</p> <!-- ARREGLARRR -->
-                        </div>
+                            <p class="medium-small flow-text light-green-text">{{ disponibilidad }}</p></div>
 
                         <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->
                             <p class=" grey-text flow-text text-darken-4" style="font-size: 1.3rem;">Formas de pago</p>
@@ -368,10 +369,16 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col s4 offset-s8 right-align"> <!--offset-s4-->
-                                                <a class="btn-floating activator waves-effect waves-light darken-2"
-                                                   href="../{{ producto.name }}/modificar">
-                                                    <i class="material-icons">mode_edit</i></a>
+                                            <div class="row">
+                                                <div class="col s4 m5 center-align"> <!--offset-s4-->
+                                                    <a href="{% url 'acme:eliminar' producto.id %}">
+                                                        Eliminar</a>
+                                                </div>
+                                                <div class="col s6 right-align"> <!--offset-s4-->
+                                                    <a class="btn-floating activator waves-effect waves-light darken-2"
+                                                       href="{% url 'acme:modificar' producto.id %}">
+                                                        <i class="material-icons">mode_edit</i></a>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -385,7 +392,8 @@
                             </div>
 
                             <div class="col s4 offset-s8 right-align"> <!--offset-s4-->
-                                <a class="btn-floating activator waves-effect waves-light darken-2" href="../gestion/">
+                                <a class="btn-floating activator waves-effect waves-light darken-2"
+                                   href="{% url 'acme:gestion' %}">
                                     <i class="material-icons">add</i></a>
                             </div>
                         </div>

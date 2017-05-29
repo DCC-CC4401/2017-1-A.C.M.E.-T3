@@ -2,12 +2,17 @@
 
 {% load staticfiles %}
 {% block content %}
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.modal').modal();
         });
 
+    </script>
+    <script>
+        function call_counter(users, user) {
+            $.post()
+        }
     </script>
     <main>
         {% if not users.init_time %}
@@ -84,9 +89,11 @@
                             <div class="col s3 l2 hide-on-med-and-down center-align">
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
-                                        <p class="card-title grey-text flow-text text-darken-4"
-                                           style="font-size: 1.3rem;">Favorito</p>
-                                        <input type="checkbox"><span class="lever"></span>
+                                        {% if user.is_authenticated %}
+                                            <p class="card-title grey-text flow-text text-darken-4"
+                                               style="font-size: 1.3rem;">Favorito</p>
+                                            <button>Favorito</button>
+                                        {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
                                                   style="font-size:22px; line-height:25px;">{{ users.likes }}</span>
@@ -104,9 +111,12 @@
 
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
-                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">
-                                        Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+                                    {% if user.is_athenticated %}
+                                        <p class="card-title grey-text flow-text text-darken-4"
+                                           style="font-size: 1.3rem;">
+                                            Favorito</p>
+                                        <input type="checkbox"><span class="lever"></span>
+                                    {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
                                               style="font-size:22px; line-height:25px;">{{ users.likes }}</span>
@@ -224,9 +234,11 @@
                             <div class="col s3 l2 hide-on-med-and-down center-align">
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
-                                        <p class="card-title grey-text flow-text text-darken-4"
-                                           style="font-size: 1.3rem;">Favorito</p>
-                                        <input type="checkbox"><span class="lever"></span>
+                                        {% if user.is_authenticated %}
+                                            <p class="card-title grey-text flow-text text-darken-4"
+                                               style="font-size: 1.3rem;">Favorito</p>
+                                            <input type="checkbox"><span class="lever"></span>
+                                        {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
                                                   style="font-size:22px; line-height:25px;">{{ users.likes }}</span>
@@ -247,9 +259,11 @@
                             </p>
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
-                                    <p class="card-title grey-text flow-text text-darken-4" style="font-size: 1.3rem;">
-                                        Favorito</p>
-                                    <input type="checkbox"><span class="lever"></span>
+                                    {% if user.is_authenticated %}
+                                        <p class="card-title grey-text flow-text text-darken-4"
+                                           style="font-size: 1.3rem;">
+                                            Favorito</p>
+                                    {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
                                               style="font-size:22px; line-height:25px;">{{ users.likes }}</span>
@@ -260,7 +274,7 @@
 
                         <div class="col s3 m2 l12 offset-s1">
                             <p class="flow-text text-darken-4">Estado</p>
-                            <p class="medium-small flow-text light-green-text">Disponible</p> <!-- ARREGLARRR -->
+                            <p class="medium-small flow-text light-green-text">{{ disponibilidad }}</p>
                         </div>
 
                         <div class="col s3 m2 l12 offset-s1"> <!--offset-s2-->

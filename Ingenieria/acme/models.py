@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.contrib.auth.models import User
+
 
 class Product(models.Model):
     cost = models.IntegerField()
@@ -15,12 +17,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 class VendedorFijoProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     init_time = models.TimeField()
     end_time = models.TimeField()
     likes = models.PositiveIntegerField(default=0)
-    avatar = models.ImageField(upload_to='photos',blank=True)
+    avatar = models.ImageField(upload_to='photos', blank=True)
     cash = models.BooleanField(default=False)
     credit = models.BooleanField(default=False)
     debit = models.BooleanField(default=False)
@@ -29,10 +32,11 @@ class VendedorFijoProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class VendedorAmbProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     check = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='photos',blank=True)
+    avatar = models.ImageField(upload_to='photos', blank=True)
     likes = models.PositiveIntegerField(default=0)
     cash = models.BooleanField(default=False)
     credit = models.BooleanField(default=False)
@@ -42,9 +46,13 @@ class VendedorAmbProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def set_likes(self, like):
+        self.likes = like
+
+
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='photos',blank=True)
+    avatar = models.ImageField(upload_to='photos', blank=True)
     favVendFijo = models.ManyToManyField(VendedorFijoProfile, blank=True)
     favVendAmb = models.ManyToManyField(VendedorAmbProfile, blank=True)
 

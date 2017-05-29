@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from acme.models import ClientProfile, VendedorFijoProfile, VendedorAmbProfile, Product
 
+
 class VendAmbForm(UserCreationForm):
     email = forms.EmailField(required=True)
     username = forms.CharField(max_length=200, required=True)
@@ -126,3 +127,5 @@ class ProductForm(forms.ModelForm):
                        photo=self.cleaned_data['photo'])
         prod.save()
         return prod
+
+
