@@ -64,7 +64,7 @@ def signupVendFijo(request):
     args = {}
     args.update(csrf(request))
     args['form'] = form
-    return render(request, 'acme/signupVendFijo.html', args)
+    return render(request, 'acme/signupVendFijo.html')
 
 def gestion(request):
     if request.method == 'POST':
@@ -73,7 +73,8 @@ def gestion(request):
             f = form.save()
             f.vendedor = request.user
             f.save()
-            return HttpResponse('image upload success')
+            return redirect('acme:perfil')
+
     else:
         form = ProductForm()
     args = {}
@@ -83,7 +84,7 @@ def gestion(request):
 
 def perfil(request):
 
-    user= request.user
+    user=request.user
     productos= Product.objects.filter(vendedor=user)
     print (productos)
 
@@ -101,3 +102,21 @@ def perfil(request):
             return render(request, 'acme/vendedor-profile-page.html', {'productos': productos, 'disponibilidad': "No Disponible"})
 
     return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
+
+def update(request, id):
+    p = Product.objects.get(pk=id)
+    #you can do this for as many fields as you like
+    #here I asume you had a form with input like <input type="text" name="name"/>
+    #so it's basically like that for all form fields
+    p.name = request.POST.get('name')
+    p.save()
+    return HttpResponse('updated')
+
+def delete(request, id):
+    emp = Product.objects.get(pk=id)
+    emp.delete()
+    return HttpResponse('deleted')
+
+def modificar(request):
+    a=request.body
+    return render(request, 'acme/modificar-producto.html', {})

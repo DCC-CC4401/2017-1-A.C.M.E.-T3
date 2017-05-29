@@ -14,5 +14,6 @@ urlpatterns = [
   url(r'^signup-Vendedor-Ambulante/$', views.signupVendAmb, name='signupAmb'),
   url(r'^Perfil/$', views.perfil, name='perfil'),
   url(r'^gestion/', views.gestion, name='gestion'),
+  url(r'^modificar/', views.modificar, name='modificar'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
