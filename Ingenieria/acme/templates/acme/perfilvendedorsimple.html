@@ -85,9 +85,7 @@
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
                                         {% if user.is_authenticated %}
-                                            <p class="card-title grey-text flow-text text-darken-4"
-                                               style="font-size: 1.3rem;">Favorito</p>
-                                            <input type="checkbox"><span class="lever"></span>
+                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
                                         {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
@@ -106,11 +104,8 @@
 
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
-                                    {% if user.is_athenticated %}
-                                        <p class="card-title grey-text flow-text text-darken-4"
-                                           style="font-size: 1.3rem;">
-                                            Favorito</p>
-                                        <input type="checkbox"><span class="lever"></span>
+                                    {% if user.is_authenticated %}
+                                        <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
                                     {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
@@ -230,9 +225,7 @@
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
                                         {% if user.is_authenticated %}
-                                            <p class="card-title grey-text flow-text text-darken-4"
-                                               style="font-size: 1.3rem;">Favorito</p>
-                                            <input type="checkbox"><span class="lever"></span>
+                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
                                         {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
@@ -255,9 +248,7 @@
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     {% if user.is_authenticated %}
-                                        <p class="card-title grey-text flow-text text-darken-4"
-                                           style="font-size: 1.3rem;">
-                                            Favorito</p>
+                                        <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
                                     {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
