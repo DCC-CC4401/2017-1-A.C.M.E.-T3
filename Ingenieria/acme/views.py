@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
-
+from datetime import datetime, date, time, timedelta
+import calendar
 from acme.forms import UserForm, VendFijoForm, VendAmbForm
 from acme.models import *
 
+def vendedor(request):
+    return render(request, 'acme/vendedor-profile-page.html', {})
 
 def indexNotRegister(request):
     userfijo = VendedorFijoProfile.objects.all()
@@ -88,7 +92,6 @@ def signupVendFijo(request):
     args['form'] = form
     return render(request, 'acme/signupVendFijo.html', args)
 
-
 def viewClientFijo(request, usuario):
     #users = get_object_or_404(VendedorFijoProfile, username = usuario)
     #print users
@@ -97,3 +100,24 @@ def viewClientFijo(request, usuario):
 def viewClientAmb(request, usuario):
     #query_result_amb = VendedorAmbProfile.objects.all()
     return render(request, 'acme/profile.html', {})# {'users':users})
+
+def perfil(request):
+
+    user= request.user
+    productos= Product.objects.filter(vendedor=user)
+    print (productos)
+
+    usuarioFijo = VendedorFijoProfile.objects.filter(user=user)
+    if (usuarioFijo.__len__() !=0):
+        ahora = datetime.now()
+        tiempoInicial = usuarioFijo[0].init_time.__str__().split(":")
+        tiempoFinal= usuarioFijo[0].end_time.__str__().split(":")
+        horaInicial=time(int(tiempoInicial[0]),int(tiempoInicial[1]),int(tiempoInicial[2]))
+        horaFinal = time(int(tiempoFinal[0]),int(tiempoFinal[1]),int(tiempoFinal[2]))
+        horaActual= time(ahora.hour,ahora.minute,ahora.second)
+        if horaInicial <= horaActual and horaActual <= horaFinal :
+            return render(request, 'acme/vendedor-profile-page.html', {'productos': productos , 'disponibilidad':"Disponible"})
+        else:
+            return render(request, 'acme/vendedor-profile-page.html', {'productos': productos, 'disponibilidad': "No Disponible"})
+
+    return render(request, 'acme/vendedor-profile-page.html',{'productos':productos})
