@@ -132,7 +132,7 @@ def signupVendFijo(request):
     args = {}
     args.update(csrf(request))
     args['form'] = form
-    return render(request, 'acme/signupVendFijo.html')
+    return render(request, 'acme/signupVendFijo.html',args)
 
 def gestion(request):
     if request.method == 'POST':
