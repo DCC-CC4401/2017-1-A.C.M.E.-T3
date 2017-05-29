@@ -141,7 +141,7 @@ def gestion(request):
             f = form.save()
             f.vendedor = request.user
             f.save()
-            return redirect('acme:perfil')
+            return redirect('acme:index')
 
     else:
         form = ProductForm()

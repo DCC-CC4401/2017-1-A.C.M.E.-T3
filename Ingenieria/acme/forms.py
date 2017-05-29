@@ -114,7 +114,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        exclude = ('user', 'photo')
+        exclude = ('user',)
         fields = ('cost', 'name', 'description', 'stock', 'category', 'photo', 'user')
 
     def save(self, commit=True):

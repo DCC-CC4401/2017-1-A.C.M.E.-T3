@@ -1,95 +1,89 @@
 {% extends 'acme/base.html' %}
 {% block content %}
 
-<main>
-<div class="section"></div>
+    <main>
+        <div class="section"></div>
 
-      <h4 class="teal-text" style="text-align: center;">Agregar Item</h4>
-      <div class="section"></div>
+        <h4 class="teal-text" style="text-align: center;">Agregar Item</h4>
+        <div class="section"></div>
 
-      <div class="container">
-        <div class="z-depth-1 grey lighten-4 row" style="margin-left: 5%; margin-right: 5%; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row"
+                 style="margin-left: 5%; margin-right: 5%; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form action="/gestion/" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 
-              <div class='row'>
-                <input type="submit" class='col offset-l4 btn waves-effect button teal save btn btn-default'></input>
-              </div>
-
-
-            <div class='row'>
-              <div class='col s12 m12'>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class='input-field col s12 m12'>
-                  Nombre del producto:
-                 <div class="input-field inline ">
-                 <label for="{{ form.name.id_for_label }}"></label> {{ form.name }}
-                <label style="text-align: center" for='item'></label>
-                 </div>
-              </div>
-            </div>
-
-          <div class='row'>
-              <div class='input-field col s12 m12'>
-                  Categoria del producto:
-                 <div class="input-field inline ">
-                 <label for="{{ form.category.id_for_label }}"></label> {{ form.category }}
-                <label style="text-align: center" for='item'></label>
-                 </div>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class='input-field col s12 m12'>
-                  &ensp;Precio del producto:
-                  <div class="input-field inline">
-                  <label for="{{ form.cost.id_for_label }}"></label> {{ form.cost }}
-                <label style="text-align: center" for='precio'></label>
-                  </div>
-              </div>
-            </div>
-            <div class='row'>
-              <div class='input-field col s12 m12'>
-                  &ensp;Stock del producto:
-                  <div class="input-field inline">
-                  <label for="{{ form.stock.id_for_label }}"></label> {{ form.stock }}
-                <label style="text-align: center" for='stock'></label>
-                  </div>
-              </div>
-            </div>
-
-              <div class="row">
-                <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s12 m12">
-                      <i class="material-icons prefix">&emsp;mode_edit</i>
-                      <label for="{{ form.description.id_for_label }}"></label> {{ form.description }}
-                      <label  for="icon_prefix2">&emsp;Descripción</label>
+                    <div class='row'>
+                        <div class='col s12 m12'>
+                        </div>
                     </div>
-                  </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12 m12'>
+                            Nombre del producto:
+                            <div class="input-field inline ">
+                                <label for="{{ form.name.id_for_label }}"></label> {{ form.name }}
+                                <label style="text-align: center" for='item'></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12 m12'>
+                            Categoria del producto:
+                            <div class="input-field inline ">
+                                <label for="{{ form.category.id_for_label }}"></label> {{ form.category }}
+                                <label style="text-align: center" for='item'></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12 m12'>
+                            &ensp;Precio del producto:
+                            <div class="input-field inline">
+                                <label for="{{ form.cost.id_for_label }}"></label> {{ form.cost }}
+                                <label style="text-align: center" for='precio'></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12 m12'>
+                            &ensp;Stock del producto:
+                            <div class="input-field inline">
+                                <label for="{{ form.stock.id_for_label }}"></label> {{ form.stock }}
+                                <label style="text-align: center" for='stock'></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="row">
+                            <div class="input-field col s12 m12">
+                                <i class="material-icons prefix">&emsp;mode_edit</i>
+                                <label for="{{ form.description.id_for_label }}"></label> {{ form.description }}
+                                <label for="icon_prefix2">&emsp;Descripción</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="file-upload" class="section">
+                        <!--Default version-->
+                        <div class="row section">
+                            <div class="col s8 m4 l3">
+                            </div>
+                        </div>
+                        Imagen del producto:
+                        {% csrf_token %}
+                        <label for="{{ form.photo.id_for_label }}"></label> {{ form.photo }}
+                    </div>
+                    <div class='row'>
+                        <input type='submit' value="Agregar"/>
+                    </div>
                 </form>
             </div>
-
-            <div id="file-upload" class="section">
-             <!--Default version-->
-            <div class="row section">
-              <div class="col s8 m4 l3">
-              </div>
-                  </div>
-                Imagen del producto:
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                  <label for="{{ form.photo.id_for_label }}"></label> {{ form.photo }}
-              </form>
-              </div>
-          </form>
         </div>
-      </div>
 
 
-
-</main>
+    </main>
 {% endblock %}
