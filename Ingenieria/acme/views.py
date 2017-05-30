@@ -308,30 +308,38 @@ def delete_user(request, usuario):
 
 
 def editar(request):
-    us = VendedorFijoProfile.objects.filter(user=request.user)
-    usuario = request.user
-    if us:
+    usuario = VendedorFijoProfile.objects.filter(user=request.user)
+    if usuario:
         if request.method == 'GET':
-            form = VendFijoForm(instance=usuario)
-            form.fijo = True
+            form = VendFijoForm(instance=usuario[0])
+            form.initial['first_name'] = request.user.first_name
+            form.initial['last_name'] = request.user.last_name
+            form.initial['username'] = request.user.username
+            form.initial['email'] = request.user.email
         else:
-            form = VendFijoForm(request.POST, request.FILES)
+            form = VendFijoForm(request.POST, request.FILES, instance=usuario[0])
+            form.initial['password1'] = request.user.password
+            form.initial['password2'] = request.user.password
             if form.is_valid():
                 user = form.save()
-                user.save()
+                delete_user(request, usuario[0])
                 return redirect('acme:index')
     else:
+        usuario = VendedorAmbProfile.objects.filter(user=request.user)
         if request.method == 'GET':
-            form = VendAmbForm(instance=usuario)
-            form.fijo = False
+            form = VendAmbForm(instance=usuario[0])
+            form.initial['first_name'] = request.user.first_name
+            form.initial['last_name'] = request.user.last_name
+            form.initial['username'] = request.user.username
+            form.initial['email'] = request.user.email
+
         else:
-            form = VendAmbForm(request.POST, request.FILES)
+            form = VendAmbForm(request.POST, request.FILES, instance=usuario[0])
             if form.is_valid():
                 user = form.save()
-                user.save()
+                delete_user(request, usuario[0])
                 return redirect('acme:index')
     return render(request, 'acme/editar.html', {'form': form})
-
 
 def viewClientAmb(request, usuario):
     users = get_object_or_404(VendedorAmbProfile, user=User.objects.get(username=usuario))
