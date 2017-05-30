@@ -36,7 +36,8 @@ def timeDisp(usuario):
 def perfil(request):
     user = request.user
     productos = Product.objects.filter(vendedor=user)
-    usuarioFijo = VendedorFijoProfile.objects.get(user=user)
+    usuarioFijo = VendedorFijoProfile.objects.filter(user=user)
+
     if usuarioFijo:
         disponibilidad = timeDisp(usuarioFijo)
         return render(request, 'acme/vendedor-profile-page.html',
