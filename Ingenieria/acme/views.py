@@ -199,8 +199,22 @@ def viewClientFijo(request, usuario):
 #                                    'esAmbulante': None,'vendedor': vendedor[0]})
 
 
-def agregarfavorito(request, id_user):
+def agregarfavoritoFijo(request, id_user):
     vendedor = VendedorFijoProfile.objects.filter(id=id_user)
+    client = ClientProfile.objects.get(user=request.user)
+    if vendedor:
+        userfijo = vendedor[0]
+        useramb = None
+        userfijo.likes += 1
+        print (userfijo.likes )
+        userfijo.save()
+        print (userfijo.likes)
+        client.favVendFijo.add(vendedor[0])
+        client.save()
+        return render(request, 'acme/Favoritos.html',
+                          {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
+
+def agregarfavoritoMovil(request, id_user):
     vendedorAmb = VendedorAmbProfile.objects.filter(id=id_user)
     client = ClientProfile.objects.get(user=request.user)
     if vendedorAmb:
@@ -211,19 +225,23 @@ def agregarfavorito(request, id_user):
         client.favVendAmb.add(vendedorAmb[0])
         client.save()
         return render(request, 'acme/Favoritos.html',
-                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
-    if vendedor:
+                          {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
+
+
+def eliminarfavoritoFijo(request, id_user):
+    vendedor = VendedorFijoProfile.objects.filter(id=id_user)
+    client = ClientProfile.objects.get(user=request.user)
+    if vendedor :
         userfijo = vendedor[0]
         useramb = None
-        vendedor[0].likes += 1
+        vendedor[0].likes -= 1
         vendedor[0].save()
-        client.favVendFijo.add(vendedor[0])
+        client.favVendFijo.remove(vendedor[0])
         client.save()
-        return render(request, 'acme/Favoritos.html',
-                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
+        return render(request, 'acme/Favoritos-Elim.html',
+                          {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
 
-def eliminarfavorito(request, id_user):
-    vendedor = VendedorFijoProfile.objects.filter(id=id_user)
+def eliminarfavoritoMovil(request, id_user):
     vendedorAmb = VendedorAmbProfile.objects.filter(id=id_user)
     client = ClientProfile.objects.get(user=request.user)
     if vendedorAmb:
@@ -234,16 +252,8 @@ def eliminarfavorito(request, id_user):
         client.favVendAmb.remove(vendedorAmb[0])
         client.save()
         return render(request, 'acme/Favoritos-Elim.html',
-                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
-    if vendedor:
-        userfijo = vendedor[0]
-        useramb = None
-        vendedor[0].likes -= 1
-        vendedor[0].save()
-        client.favVendFijo.remove(vendedor[0])
-        client.save()
-        return render(request, 'acme/Favoritos-Elim.html',
-                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
+                          {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
+
 
 def update(request, id):
     form = ProductForm(request.POST, request.FILES)
