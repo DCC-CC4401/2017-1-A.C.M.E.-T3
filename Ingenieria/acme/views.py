@@ -278,27 +278,27 @@ def delete_user(request, usuario):
 
 
 def editar(request):
-    usuario = VendedorFijoProfile.objects.filter(user=request.user)
-    if usuario:
+    us = VendedorFijoProfile.objects.filter(user=request.user)
+    usuario = request.user
+    if us:
         if request.method == 'GET':
-            form = VendFijoForm(instance=usuario[0])
+            form = VendFijoForm(instance=usuario)
+            form.fijo = True
         else:
-            form = VendFijoForm(request.POST, instance=usuario[0])
+            form = VendFijoForm(request.POST, request.FILES)
             if form.is_valid():
                 user = form.save()
                 user.save()
-                delete_user(request, usuario[0])
                 return redirect('acme:index')
     else:
-        usuario = VendedorAmbProfile.objects.filter(user=request.user)
         if request.method == 'GET':
-            form = VendAmbForm(instance=usuario[0])
+            form = VendAmbForm(instance=usuario)
+            form.fijo = False
         else:
-            form = VendAmbForm(request.POST, instance=usuario[0])
+            form = VendAmbForm(request.POST, request.FILES)
             if form.is_valid():
                 user = form.save()
                 user.save()
-                delete_user(request, usuario[0])
                 return redirect('acme:index')
     return render(request, 'acme/editar.html', {'form': form})
 

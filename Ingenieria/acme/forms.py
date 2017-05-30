@@ -14,12 +14,13 @@ class VendAmbForm(UserCreationForm):
     debit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     credit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     student = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
         fields = (
             'username', 'email', 'password1', 'password2', 'last_name', 'first_name', 'cash', 'debit', 'credit',
-            'student')
+            'student', 'avatar')
 
     def save(self, commit=True):
         user = super(VendAmbForm, self).save(commit=True)
@@ -45,19 +46,21 @@ class VendFijoForm(UserCreationForm):
     first_name = forms.CharField(max_length=200, required=True)
     last_name = forms.CharField(max_length=200, required=True)
     password1 = forms.CharField(widget=forms.PasswordInput)
-    init_time = forms.TimeField(required=True)
-    end_time = forms.TimeField(required=True)
+    init_time = forms.TimeField(required=False)
+    end_time = forms.TimeField(required=False)
     cash = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     debit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     credit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     student = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    avatar = forms.ImageField(required=False)
+
 
     class Meta:
         model = User
         fields = (
             'username', 'email', 'password1', 'password2', 'init_time', 'end_time', 'cash', 'debit', 'credit',
             'student',
-            'first_name', 'last_name')
+            'first_name', 'last_name', 'avatar')
 
     def save(self, commit=True):
         user = super(VendFijoForm, self).save(commit=True)
