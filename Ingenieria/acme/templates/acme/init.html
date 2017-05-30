@@ -1,0 +1,121 @@
+{% extends 'acme/base.html' %}
+{% block content %}
+    {% if not user.is_authenticated %}
+        <div class="brand-logo right">
+            {% if usersfijo and useramb %}
+                <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                     src="../static/img/mapNotRegister2.png" usemap="#Map"/>
+                <map name="Map">
+                    <area shape="rect" coords="550,160,590,210" alt="notfav"
+                          href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                    <area shape="rect" coords="590,380,625,430" alt="notfav"
+                          href={% url 'acme:ViewClient2' useramb.user.username %}>
+                </map>
+            {% elif useramb %}
+                <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                     src="../static/img/mapNotRegister1.png" usemap="#Map2"/>
+                <map name="Map2">
+                    <area shape="rect" coords="590,380,625,430" alt="notfav"
+                          href={% url 'acme:ViewClient2' useramb.user.username %}>
+                </map>
+            {% elif usersfijo %}
+                <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                     src="../static/img/mapNotRegister4.png" usemap="#Map3"/>
+                <map name="Map3">
+                    <area shape="rect" coords="550,160,590,210" alt="notfav"
+                          href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                </map>
+            {% else %}
+                <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                     src="../static/img/mapNotRegister3.png"/>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="brand-logo right">
+            {% if user.clientprofile %}
+                {% if fijoFav and ambFav %}
+                    <img id="image" style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                         src="../static/img/map2fav.png" usemap="#Map6"/>
+                    <map name="Map6">
+                        <area shape="rect" coords="550,160,590,210" alt="notfav"
+                              href={% url 'acme:ViewClient' fijoFav.user.username %}>
+                        <area shape="rect" coords="590,380,625,430" alt="notfav"
+                              href={% url 'acme:ViewClient2' ambFav.user.username %}>
+                    </map>
+                {% elif fijoFav %}
+                    {% if useramb %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/1favfij1amb.png" usemap="#Map8"/>
+                        <map name="Map8">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' fijoFav.user.username %}>
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/1favfij.png" usemap="#Map8"/>
+                        <map name="Map8">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' fijoFav.user.username %}>
+                        </map>
+                    {% endif %}
+                {% elif ambFav %}
+                    {% if usersfijo %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/1favamb1fij.png" usemap="#Map12"/>
+                        <map name="Map12">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' ambFav.user.username %}>
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/1favamb.png" usemap="#Map12"/>
+                        <map name="Map12">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' ambFav.user.username %}>
+                        </map>
+                    {% endif %}
+                {% else %}
+                    {% if usersfijo and useramb %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/mapNotRegister2.png" usemap="#Map"/>
+                        <map name="Map">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% elif useramb %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/mapNotRegister1.png" usemap="#Map2"/>
+                        <map name="Map2">
+                            <area shape="rect" coords="590,380,625,430" alt="notfav"
+                                  href={% url 'acme:ViewClient2' useramb.user.username %}>
+                        </map>
+                    {% elif usersfijo %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/mapNotRegister4.png" usemap="#Map3"/>
+                        <map name="Map3">
+                            <area shape="rect" coords="550,160,590,210" alt="notfav"
+                                  href={% url 'acme:ViewClient' usersfijo.user.username %}>
+                        </map>
+                    {% else %}
+                        <img style="border: none; height: auto; max-width: 100%; width: auto; min-height: 600px;"
+                             src="../static/img/mapNotRegister3.png"/>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            $('img[usemap]').rwdImageMaps();
+        });
+    </script>
+{% endblock %}
