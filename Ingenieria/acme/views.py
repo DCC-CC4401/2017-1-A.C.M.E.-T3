@@ -12,6 +12,7 @@ import calendar
 from acme.forms import *
 from acme.models import *
 
+
 ## funcion auxiliar encargada de calcular disponibilidad del vendedor fijo
 
 def timeDisp(usuario):
@@ -190,22 +191,28 @@ def perfilVendedor(request , vendedor):
                                    'esAmbulante': None,'vendedor': vendedor[0]})
 
 
-def agregarfavorito(request, id):
-    vendedor = VendedorFijoProfile.objects.get(user=User.objects.get(id=id))
+def agregarfavorito(request, id_user):
+    vendedor = VendedorFijoProfile.objects.get(id=id_user)
+    client = ClientProfile.objects.get(user=request.user)
     if vendedor != None:
+        userfijo = vendedor
+        useramb = None
         vendedor.likes += 1
         vendedor.save()
-        favoritismo = ClientProfile.objects.get(user=User.objects.get(username=request.user))
-        relacion = ClientProfile(user=favoritismo.user, avatar=favoritismo.avatar, favVendFijo=vendedor)
-        relacion.save()
+        client.favVendFijo.add(vendedor)
+        client.save()
+        return render(request, 'acme/Favoritos.html',
+                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
     else:
-        vendedor = VendedorAmbProfile.objects.get(user=User.objects.get(id=id))
+        vendedor = VendedorAmbProfile.objects.get(user=User.objects.get(id=id_user))
+        userfijo = None
+        useramb = vendedor
         vendedor.likes += 1
         vendedor.save()
-        favoritismo = ClientProfile.objects.get(user=User.objects.get(username=request.user))
-        relacion = ClientProfile(user=favoritismo.user, avatar=favoritismo.avatar, favVendAmb=vendedor)
-        relacion.save()
-    return render(request, 'acme/moficicacionFavoritos', {})
+        client.favVendAmb.add(vendedor)
+        client.save()
+        return render(request, 'acme/Favoritos.html',
+                      {'userfijo': userfijo, 'useramb': useramb, 'full_name': userfijo.user.username})
 
 
 def update(request, id):
@@ -259,7 +266,7 @@ def delete(request, id_producto):
     if request.method == 'POST':
         emp.delete()
         return redirect('acme:index')
-    return render(request,'acme/eliminar-producto.html', {'producto': emp})
+    return render(request, 'acme/eliminar-producto.html', {'producto': emp})
 
 
 def delete_user(request, usuario):
@@ -267,6 +274,7 @@ def delete_user(request, usuario):
     if request.method == 'POST':
         emp.delete()
         return redirect('acme:index')
+
 
 def editar(request):
     usuario = VendedorFijoProfile.objects.filter(user=request.user)
@@ -292,6 +300,7 @@ def editar(request):
                 delete_user(request, usuario[0])
                 return redirect('acme:index')
     return render(request, 'acme/editar.html', {'form': form})
+
 
 def viewClientAmb(request, usuario):
     users = get_object_or_404(VendedorAmbProfile, user=User.objects.get(username=usuario))
