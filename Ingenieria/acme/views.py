@@ -291,9 +291,29 @@ def editar(request):
             us = usuario[0]
             if request.FILES.__len__() != 0:
                 us.avatar = request.FILES.get('avatar')
+
+            if request.POST.get('student') == 'on':
+                us.student = True
+            else:
+                us.student = False
+
+            if request.POST.get('cash') == 'on':
+                us.cash = True
+            else:
+                us.cash = False
+
+            if request.POST.get('debit') == 'on':
+                us.debit = True
+            else:
+                us.debit = False
+
+            if request.POST.get('credit') == 'on':
+                us.credit = True
+            else:
+                us.credit = False
+
             update_profile(request)
             us.save()
-            update_profile(request)
             return redirect('acme:index')
     else:
         usuario = VendedorAmbProfile.objects.filter(user=request.user)
@@ -306,6 +326,27 @@ def editar(request):
             us = usuario[0]
             if request.FILES.__len__() != 0:
                 us.avatar = request.FILES.get('avatar')
+
+            if request.POST.get('student') == 'on':
+                us.student = True
+            else:
+                us.student = False
+
+            if request.POST.get('cash') == 'on':
+                us.cash = True
+            else:
+                us.cash = False
+
+            if request.POST.get('debit') == 'on':
+                us.debit = True
+            else:
+                us.debit = False
+
+            if request.POST.get('credit') == 'on':
+                us.credit = True
+            else:
+                us.credit = False
+
             update_profile(request)
             us.save()
             return redirect('acme:index')
