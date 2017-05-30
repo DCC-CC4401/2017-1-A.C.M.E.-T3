@@ -286,6 +286,7 @@ def editar(request):
             form = VendFijoForm(instance=usuario[0])
             form.initial['first_name'] = request.user.first_name
             form.initial['last_name'] = request.user.last_name
+            form.initial['fijo'] = True
 
         else:
             us = usuario[0]
@@ -312,6 +313,9 @@ def editar(request):
             else:
                 us.credit = False
 
+            us.end_time = request.POST.get('end_time')
+            us.init_time = request.POST.get('init_time')
+
             update_profile(request)
             us.save()
             return redirect('acme:index')
@@ -321,6 +325,7 @@ def editar(request):
             form = VendAmbForm(instance=VendedorAmbProfile.objects.filter(user=request.user)[0])
             form.initial['first_name'] = request.user.first_name
             form.initial['last_name'] = request.user.last_name
+            form.initial['fijo'] = False
 
         else:
             us = usuario[0]

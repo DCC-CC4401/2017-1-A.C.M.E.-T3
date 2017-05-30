@@ -37,10 +37,8 @@
               </div>
             </div>
 
-            {% block content2 %}
 
-
-                    {% if form.fijo %}
+                    {% if form.initial.fijo %}
                         <div class="row">
                             <div class="col s12">
                                 <div class="row">
@@ -58,14 +56,12 @@
                             </div>
                         </div>
                     {% endif %}
-
-                    {% if not form.fijo %}
+                    {% if not form.initial.fijo %}
                             <p>
                                 {{ form.check }}
                                 <label for={{ form.check.id_for_label }}>Disponible</label>
                             </p>
                     {% endif %}
-            {% endblock %}
 
                     <div class='row'>
                         <div class='input-field col s12 m12'>
