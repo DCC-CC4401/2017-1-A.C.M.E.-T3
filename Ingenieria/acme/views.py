@@ -347,6 +347,11 @@ def editar(request):
             else:
                 us.credit = False
 
+            if request.POST.get('check') == 'on':
+                us.check = True
+            else:
+                us.check = False
+
             update_profile(request)
             us.save()
             return redirect('acme:index')

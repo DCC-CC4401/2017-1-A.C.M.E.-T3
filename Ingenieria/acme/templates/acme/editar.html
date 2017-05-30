@@ -58,6 +58,13 @@
                             </div>
                         </div>
                     {% endif %}
+
+                    {% if not form.fijo %}
+                            <p>
+                                {{ form.check }}
+                                <label for={{ form.check.id_for_label }}>Disponible</label>
+                            </p>
+                    {% endif %}
             {% endblock %}
 
                     <div class='row'>

@@ -15,12 +15,14 @@ class VendAmbForm(UserCreationForm):
     credit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     student = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     avatar = forms.ImageField(required=False)
+    check = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+
 
     class Meta:
         model = User
         fields = (
             'username', 'email', 'password1', 'password2', 'last_name', 'first_name', 'cash', 'debit', 'credit',
-            'student', 'avatar')
+            'student', 'avatar', 'check')
 
     def save(self, commit=True):
         user = super(VendAmbForm, self).save(commit=True)
@@ -29,7 +31,8 @@ class VendAmbForm(UserCreationForm):
         client = VendedorAmbProfile(user=user, cash=self.cleaned_data['cash'],
                                     debit=self.cleaned_data['debit'], credit=self.cleaned_data['credit'],
                                     student=self.cleaned_data['student'],
-                                    avatar=self.cleaned_data['avatar'])
+                                    avatar=self.cleaned_data['avatar'],
+                                    check=self.cleaned_data['check'])
         if commit:
             client.save()
         return user
