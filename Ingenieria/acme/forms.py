@@ -128,4 +128,32 @@ class ProductForm(forms.ModelForm):
         prod.save()
         return prod
 
+class UpdateProfile(forms.ModelForm):
+    username = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+    def clean_email(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+
+        if email and User.objects.filter(email=email).exclude(username=username).count():
+            raise forms.ValidationError(
+                'This email address is already in use. Please supply a different email address.')
+        return email
+
+    def save(self, user, commit=True):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+
+        if commit:
+            user.save()
+
+        return user
+
 

@@ -2,12 +2,14 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import csrf
 
 from datetime import datetime, date, time, timedelta
 import calendar
+
+from django.urls import reverse
 
 from acme.forms import *
 from acme.models import *
@@ -316,41 +318,6 @@ def delete_user(request, usuario):
         emp.delete()
         return redirect('acme:index')
 
-
-def editar(request):
-    usuario = VendedorFijoProfile.objects.filter(user=request.user)
-    if usuario:
-        if request.method == 'GET':
-            form = VendFijoForm(instance=usuario[0])
-            form.initial['first_name'] = request.user.first_name
-            form.initial['last_name'] = request.user.last_name
-            form.initial['username'] = request.user.username
-            form.initial['email'] = request.user.email
-        else:
-            form = VendFijoForm(request.POST, request.FILES, instance=usuario[0])
-            form.initial['password1'] = request.user.password
-            form.initial['password2'] = request.user.password
-            if form.is_valid():
-                user = form.save()
-                delete_user(request, usuario[0])
-                return redirect('acme:index')
-    else:
-        usuario = VendedorAmbProfile.objects.filter(user=request.user)
-        if request.method == 'GET':
-            form = VendAmbForm(instance=usuario[0])
-            form.initial['first_name'] = request.user.first_name
-            form.initial['last_name'] = request.user.last_name
-            form.initial['username'] = request.user.username
-            form.initial['email'] = request.user.email
-
-        else:
-            form = VendAmbForm(request.POST, request.FILES, instance=usuario[0])
-            if form.is_valid():
-                user = form.save()
-                delete_user(request, usuario[0])
-                return redirect('acme:index')
-    return render(request, 'acme/editar.html', {'form': form})
-
 def viewClientAmb(request, usuario):
     users = get_object_or_404(VendedorAmbProfile, user=User.objects.get(username=usuario))
     productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
@@ -363,3 +330,52 @@ def viewClientAmb(request, usuario):
             fav = False
         return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos, 'fav': fav})
     return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos, 'fav': None})
+
+
+def editar(request):
+    usuario = VendedorFijoProfile.objects.filter(user=request.user)
+    if usuario:
+        if request.method == 'GET':
+            form = VendFijoForm(instance=usuario[0])
+            form.initial['first_name'] = request.user.first_name
+            form.initial['last_name'] = request.user.last_name
+            form.initial['username'] = request.user.username
+            form.initial['email'] = request.user.email
+        else:
+            update_profile(request)
+            form = VendFijoForm(request.POST, request.FILES, instance=usuario[0])
+            if form.is_valid():
+                user = form.save()
+                return redirect('acme:index')
+    else:
+        usuario = VendedorAmbProfile.objects.filter(user=request.user)
+        if request.method == 'GET':
+            form = VendAmbForm(instance=usuario[0])
+            form.initial['first_name'] = request.user.first_name
+            form.initial['last_name'] = request.user.last_name
+
+        else:
+            update_profile(request)
+            form = VendAmbForm(request.POST, request.FILES, instance=usuario[0])
+            if form.is_valid():
+                user = form.save()
+                return redirect('acme:index')
+    return render(request, 'acme/editar.html', {'form': form})
+
+
+def update_profile(request):
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateProfile(request.POST)
+        if form.is_valid():
+            form.save(request.user)
+    else:
+        form = UpdateProfile()
+
+    args['form'] = form
+
+
+
+
+
