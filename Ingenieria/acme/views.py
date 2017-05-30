@@ -35,7 +35,6 @@ def timeDisp(usuario):
         else:
             return "No Disponible"
 
-
 def perfil(request):
     user = request.user
     productos = Product.objects.filter(vendedor=user)
@@ -45,7 +44,6 @@ def perfil(request):
         return render(request, 'acme/vendedor-profile-page.html',
                       {'productos': productos, 'disponibilidad': disponibilidad})
     return render(request, 'acme/vendedor-profile-page.html', {'productos': productos})
-
 
 def indexNotRegister(request):
     userfijo = VendedorFijoProfile.objects.all()
@@ -82,14 +80,11 @@ def indexNotRegister(request):
     return render(request, 'acme/init.html', {'usersfijo': userfijo,
                                               'useramb': useramb})  # va a construir lo puesto en la planilla .html senhalada
 
-
 def register(request):
     return render(request, 'acme/loggedin.html', {})
 
-
 def signup(request):
     return render(request, 'acme/profile.html', {})
-
 
 def signupClient(request):
     if request.method == 'POST':
@@ -105,7 +100,6 @@ def signupClient(request):
     args['form'] = form
     return render(request, 'acme/signupCliente.html', args)
 
-
 def signupVendAmb(request):
     if request.method == 'POST':
         form = VendAmbForm(request.POST)
@@ -119,7 +113,6 @@ def signupVendAmb(request):
     args.update(csrf(request))
     args['form'] = form
     return render(request, 'acme/signupVendAmb.html', args)
-
 
 def signupVendFijo(request):
     if request.method == 'POST':
@@ -151,7 +144,6 @@ def gestion(request):
     args['form'] = form
     return render(request, 'acme/gestion-productos.html', args)
 
-
 def viewClientFijo(request, usuario):
     users = VendedorFijoProfile.objects.get(user=User.objects.get(username=usuario))
     productos = Product.objects.filter(vendedor=User.objects.get(username=usuario))
@@ -167,39 +159,6 @@ def viewClientFijo(request, usuario):
                       {'users': users, 'productos': productos, 'disponibilidad': disponibilidad, 'fav': fav})
     return render(request, 'acme/perfilvendedorsimple.html',
                   {'users': users, 'productos': productos, 'disponibilidad': disponibilidad, 'fav': None})
-
-# def perfilVendedor(request , vendedor):
-#     if request.user.is_authenticated():
-#         cliente = request.user
-#         usuarioVendedor = User.objects.filter(username=vendedor)
-#         vendedor = VendedorFijoProfile.objects.filter(user=usuarioVendedor[0])
-#         if vendedor.__len__() != 0 :
-#             ahora = datetime.now()
-#             tiempoInicial = vendedor[0].init_time.__str__().split(":")
-#             tiempoFinal = vendedor[0].end_time.__str__().split(":")
-#             horaInicial = time(int(tiempoInicial[0]), int(tiempoInicial[1]), int(tiempoInicial[2]))
-#             horaFinal = time(int(tiempoFinal[0]), int(tiempoFinal[1]), int(tiempoFinal[2]))
-#             horaActual = time(ahora.hour, ahora.minute, ahora.second)
-#             favoritos = ClientProfile.objects.filter(user=cliente,favVendFijo= vendedor[0])
-#             productos = Product.objects.filter(vendedor=vendedor[0].user)
-#             if favoritos.__len__()!=0 :
-#                 if horaInicial <= horaActual and horaActual <= horaFinal:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "Disponible",'esfavorito': "true",'esAmbulante':None,'vendedor': vendedor[0]})
-#                 else :
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "No Disponible", 'esfavorito': "true",
-#                                    'esAmbulante': None,'vendedor': vendedor[0]})
-#             else :
-#                 if horaInicial <= horaActual and horaActual <= horaFinal:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "Disponible", 'esfavorito': None,
-#                                    'esAmbulante': None,'vendedor': vendedor[0]})
-#                 else:
-#                     return render(request, 'acme/perfilvendedorsimple.html',
-#                                   {'productos': productos, 'disponibilidad': "No Disponible", 'esfavorito': None,
-#                                    'esAmbulante': None,'vendedor': vendedor[0]})
-
 
 def agregarfavoritoFijo(request, id_user):
     vendedor = VendedorFijoProfile.objects.filter(id=id_user)
@@ -229,7 +188,6 @@ def agregarfavoritoMovil(request, id_user):
         return render(request, 'acme/Favoritos.html',
                           {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
 
-
 def eliminarfavoritoFijo(request, id_user):
     vendedor = VendedorFijoProfile.objects.filter(id=id_user)
     client = ClientProfile.objects.get(user=request.user)
@@ -256,7 +214,6 @@ def eliminarfavoritoMovil(request, id_user):
         return render(request, 'acme/Favoritos-Elim.html',
                           {'userfijo': userfijo, 'useramb': useramb, 'full_name': useramb.user.username})
 
-
 def update(request, id):
     form = ProductForm(request.POST, request.FILES)
     if form.is_valid():
@@ -269,12 +226,6 @@ def update(request, id):
     args = {}
     args.update(csrf(request))
     args['form'] = form
-
-
-# def delete(request, id):
-#     emp = Product.objects.get(pk=id)
-#     emp.delete()
-#     return HttpResponse('deleted')
 
 def modificar(request, id_producto):
 
@@ -302,8 +253,6 @@ def modificar(request, id_producto):
     args['form'] = form
     return render(request, 'acme/modificar-producto.html', {'producto':p})
 
-
-
 def delete(request, id_producto):
     emp = Product.objects.get(pk=id_producto)
     if request.method == 'POST':
@@ -330,7 +279,6 @@ def viewClientAmb(request, usuario):
         return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos, 'fav': fav})
     return render(request, 'acme/perfilvendedorsimple.html', {'users': users, 'productos': productos, 'fav': None})
 
-
 def editar(request):
     usuario = VendedorFijoProfile.objects.filter(user=request.user)
     if usuario:
@@ -340,20 +288,29 @@ def editar(request):
             form.initial['last_name'] = request.user.last_name
 
         else:
+            us = usuario[0]
+            if request.FILES.__len__() != 0:
+                us.avatar = request.FILES.get('avatar')
+            update_profile(request)
+            us.save()
             update_profile(request)
             return redirect('acme:index')
     else:
+        usuario = VendedorAmbProfile.objects.filter(user=request.user)
         if request.method == 'GET':
             form = VendAmbForm(instance=VendedorAmbProfile.objects.filter(user=request.user)[0])
             form.initial['first_name'] = request.user.first_name
             form.initial['last_name'] = request.user.last_name
 
         else:
+            us = usuario[0]
+            if request.FILES.__len__() != 0:
+                us.avatar = request.FILES.get('avatar')
             update_profile(request)
+            us.save()
             return redirect('acme:index')
 
     return render(request, 'acme/editar.html', {'form': form})
-
 
 def update_profile(request):
     args = {}

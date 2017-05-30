@@ -14,12 +14,13 @@ class VendAmbForm(UserCreationForm):
     debit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     credit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     student = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
         fields = (
             'username', 'email', 'password1', 'password2', 'last_name', 'first_name', 'cash', 'debit', 'credit',
-            'student')
+            'student', 'avatar')
 
     def save(self, commit=True):
         user = super(VendAmbForm, self).save(commit=True)
@@ -27,7 +28,8 @@ class VendAmbForm(UserCreationForm):
         user.set_password(password)
         client = VendedorAmbProfile(user=user, cash=self.cleaned_data['cash'],
                                     debit=self.cleaned_data['debit'], credit=self.cleaned_data['credit'],
-                                    student=self.cleaned_data['student'])
+                                    student=self.cleaned_data['student'],
+                                    avatar=self.cleaned_data['avatar'])
         if commit:
             client.save()
         return user
@@ -51,13 +53,14 @@ class VendFijoForm(UserCreationForm):
     debit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     credit = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     student = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
         fields = (
             'username', 'email', 'password1', 'password2', 'init_time', 'end_time', 'cash', 'debit', 'credit',
             'student',
-            'first_name', 'last_name')
+            'first_name', 'last_name', 'avatar')
 
     def save(self, commit=True):
         user = super(VendFijoForm, self).save(commit=True)
@@ -66,7 +69,8 @@ class VendFijoForm(UserCreationForm):
         client = VendedorFijoProfile(user=user, init_time=self.cleaned_data['init_time'],
                                      end_time=self.cleaned_data['end_time'], cash=self.cleaned_data['cash'],
                                      debit=self.cleaned_data['debit'], credit=self.cleaned_data['credit'],
-                                     student=self.cleaned_data['student'])
+                                     student=self.cleaned_data['student'],
+                                     avatar=self.cleaned_data['avatar'])
         if commit:
             client.save()
         return user
