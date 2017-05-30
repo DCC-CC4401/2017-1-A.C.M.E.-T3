@@ -46,9 +46,6 @@ class VendedorAmbProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def set_likes(self, like):
-        self.likes = like
-
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

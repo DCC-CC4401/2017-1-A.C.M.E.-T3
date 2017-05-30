@@ -85,7 +85,13 @@
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
                                         {% if user.is_authenticated %}
-                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
+                                            {% if not fav %}
+                                                <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                                </h6>
+                                            {% else %}
+                                                <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                    favoritos</a></h6>
+                                            {% endif %}
                                         {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
@@ -105,7 +111,13 @@
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     {% if user.is_authenticated %}
-                                        <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
+                                        {% if not fav %}
+                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                            </h6>
+                                        {% else %}
+                                            <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                favoritos</a></h6>
+                                        {% endif %}
                                     {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
@@ -225,7 +237,13 @@
                                 <div class="switch" style="margin-left: 10px;">
                                     <label>
                                         {% if user.is_authenticated %}
-                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
+                                            {% if not fav %}
+                                                <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                                </h6>
+                                            {% else %}
+                                                <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                    favoritos</a></h6>
+                                            {% endif %}
                                         {% endif %}
                                         <h6><i class="material-icons amber-text">grade</i>
                                             <span class=" grey-text flow-text text-darken-4"
@@ -248,7 +266,13 @@
                             <div class="switch" style="margin-left: 10px;">
                                 <label>
                                     {% if user.is_authenticated %}
-                                        <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a></h6>
+                                        {% if not fav %}
+                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                            </h6>
+                                        {% else %}
+                                            <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                favoritos</a></h6>
+                                        {% endif %}
                                     {% endif %}
                                     <h6><i class="material-icons amber-text">grade</i>
                                         <span class=" grey-text flow-text text-darken-4"
