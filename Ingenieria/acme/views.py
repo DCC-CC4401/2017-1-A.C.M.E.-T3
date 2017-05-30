@@ -311,7 +311,6 @@ def delete(request, id_producto):
         return redirect('acme:index')
     return render(request, 'acme/eliminar-producto.html', {'producto': emp})
 
-
 def delete_user(request, usuario):
     emp = User.objects.get(username=usuario.username)
     if request.method == 'POST':
@@ -339,27 +338,20 @@ def editar(request):
             form = VendFijoForm(instance=usuario[0])
             form.initial['first_name'] = request.user.first_name
             form.initial['last_name'] = request.user.last_name
-            form.initial['username'] = request.user.username
-            form.initial['email'] = request.user.email
+
         else:
             update_profile(request)
-            form = VendFijoForm(request.POST, request.FILES, instance=usuario[0])
-            if form.is_valid():
-                user = form.save()
-                return redirect('acme:index')
+            return redirect('acme:index')
     else:
-        usuario = VendedorAmbProfile.objects.filter(user=request.user)
         if request.method == 'GET':
-            form = VendAmbForm(instance=usuario[0])
+            form = VendAmbForm(instance=VendedorAmbProfile.objects.filter(user=request.user)[0])
             form.initial['first_name'] = request.user.first_name
             form.initial['last_name'] = request.user.last_name
 
         else:
             update_profile(request)
-            form = VendAmbForm(request.POST, request.FILES, instance=usuario[0])
-            if form.is_valid():
-                user = form.save()
-                return redirect('acme:index')
+            return redirect('acme:index')
+
     return render(request, 'acme/editar.html', {'form': form})
 
 

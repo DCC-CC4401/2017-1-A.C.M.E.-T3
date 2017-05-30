@@ -17,17 +17,25 @@
                         </div>
                     </div>
 
-                    <div class='row'>
-                        <div class='input-field col s12 m12'>
-                            <label for={{ form.first_name.id_for_label }}> Nombre: </label> {{ form.first_name }}
-                        </div>
-                    </div>
+            <div class='row'>
+              <div class='input-field col s12 m12'>
+                  &ensp;Nombre:
+                 <div class="input-field inline ">
+                <input value="{{ form.initial.first_name }}" class='validate' type='text' name='first_name' id='first_name' />
+                <label style="text-align: center" for='item'></label>
+                 </div>
+              </div>
+            </div>
 
-                    <div class='row'>
-                        <div class='input-field col s12 m12'>
-                            <label for={{ form.last_name.id_for_label }}> Apellido: </label> {{ form.last_name }}
-                        </div>
-                    </div>
+            <div class='row'>
+              <div class='input-field col s12 m12'>
+                  &ensp;Apellido:
+                 <div class="input-field inline ">
+                <input value="{{ form.initial.last_name }}" class='validate' type='text' name='last_name' id='last_name' />
+                <label style="text-align: center" for='item'></label>
+                 </div>
+              </div>
+            </div>
 
             {% block content2 %}
 
