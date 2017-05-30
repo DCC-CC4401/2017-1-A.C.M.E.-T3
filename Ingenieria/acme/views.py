@@ -234,9 +234,10 @@ def delete(request, id):
     emp.delete()
     return HttpResponse('deleted')
 
-def modificar(request):
-    id = request.GET.get('id','')
-    p = Product.objects.get(pk=id)
+def modificar(request, id_producto):
+
+    p = Product.objects.get(pk=id_producto)
+
     if request.method == 'POST':
         if request.POST.get('type') == 'ELIMINAR':
             p.delete()
