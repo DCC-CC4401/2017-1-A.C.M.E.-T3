@@ -86,10 +86,10 @@
                                     <label>
                                         {% if user.is_authenticated %}
                                             {% if not fav %}
-                                                <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                                <h6><a href="{% url 'acme:favorito_M' users.id %}">Agregar a favoritos</a>
                                                 </h6>
                                             {% else %}
-                                                <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                <h6><a href="{% url 'acme:favorito-elim_M' users.id %}">Eliminar de
                                                     favoritos</a></h6>
                                             {% endif %}
                                         {% endif %}
@@ -112,10 +112,10 @@
                                 <label>
                                     {% if user.is_authenticated %}
                                         {% if not fav %}
-                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                            <h6><a href="{% url 'acme:favorito_M' users.id %}">Agregar a favoritos</a>
                                             </h6>
                                         {% else %}
-                                            <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                            <h6><a href="{% url 'acme:favorito-elim_M' users.id %}">Eliminar de
                                                 favoritos</a></h6>
                                         {% endif %}
                                     {% endif %}
@@ -238,10 +238,10 @@
                                     <label>
                                         {% if user.is_authenticated %}
                                             {% if not fav %}
-                                                <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                                <h6><a href="{% url 'acme:favorito_F' users.id %}">Agregar a favoritos</a>
                                                 </h6>
                                             {% else %}
-                                                <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                                <h6><a href="{% url 'acme:favorito-elim_F' users.id %}">Eliminar de
                                                     favoritos</a></h6>
                                             {% endif %}
                                         {% endif %}
@@ -267,10 +267,10 @@
                                 <label>
                                     {% if user.is_authenticated %}
                                         {% if not fav %}
-                                            <h6><a href="{% url 'acme:favorito' users.id %}">Agregar a favoritos</a>
+                                            <h6><a href="{% url 'acme:favorito_F' users.id %}">Agregar a favoritos</a>
                                             </h6>
                                         {% else %}
-                                            <h6><a href="{% url 'acme:favorito-elim' users.id %}">Eliminar de
+                                            <h6><a href="{% url 'acme:favorito-elim_F' users.id %}">Eliminar de
                                                 favoritos</a></h6>
                                         {% endif %}
                                     {% endif %}
